@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>SMOKING IS INJURIOUS TO HEALTH</title>
+
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- Scroll hint -->
+<div id="scroll-hint">↓ scroll to watch the story unfold ↓</div>
+
+<!-- Progress dots -->
+<div id="progress-bar">
+  <div class="prog-dot active" data-n="01"></div>
+  <div class="prog-line"></div>
+  <div class="prog-dot" data-n="02"></div>
+  <div class="prog-line"></div>
+  <div class="prog-dot" data-n="03"></div>
+  <div class="prog-line"></div>
+  <div class="prog-dot" data-n="04"></div>
+  <div class="prog-line"></div>
+  <div class="prog-dot" data-n="05"></div>
+  <div class="prog-line"></div>
+  <div class="prog-dot" data-n="06"></div>
+</div>
+
+<div id="scroll-container">
+  <div id="scene">
+    <div id="spotlight"></div>
+    <canvas id="smoke-canvas"></canvas>
+    <div id="ember-glow"></div>
+
+    <!-- Scene label -->
+    <div class="scene-label" id="scene-label" style="opacity:1;">
+      <div class="num" id="label-num">01</div>
+      <div class="title" id="label-title">ONE CIGARETTE. IT STARTS.</div>
+    </div>
+
+    <!-- Cigarette -->
+    <div id="cigarette-wrap">
+      <svg id="cigarette-svg" viewBox="0 0 44 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="filterGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#c8a06a"/>
+            <stop offset="30%" stop-color="#e8c890"/>
+            <stop offset="60%" stop-color="#d4aa72"/>
+            <stop offset="100%" stop-color="#b89050"/>
+          </linearGradient>
+          <linearGradient id="paperGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#d8d0c0"/>
+            <stop offset="40%" stop-color="#f0ece0"/>
+            <stop offset="70%" stop-color="#e0d8c8"/>
+            <stop offset="100%" stop-color="#c8c0b0"/>
+          </linearGradient>
+          <linearGradient id="tipGrad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#ff8c00"/>
+            <stop offset="50%" stop-color="#cc4400"/>
+            <stop offset="100%" stop-color="#661100"/>
+          </linearGradient>
+          <filter id="cig-shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+          </filter>
+          <radialGradient id="ashGrad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#888"/>
+            <stop offset="100%" stop-color="#555"/>
+          </radialGradient>
+        </defs>
+        <!-- Filter (orange/tan) section -->
+        <rect id="cig-filter" x="4" y="188" width="36" height="88" rx="4" fill="url(#filterGrad)" filter="url(#cig-shadow)"/>
+        <!-- Filter band -->
+        <rect x="4" y="185" width="36" height="5" rx="1" fill="#b07830" opacity="0.7"/>
+        <!-- Paper body -->
+        <rect id="cig-paper" x="4" y="18" width="36" height="168" rx="2" fill="url(#paperGrad)" filter="url(#cig-shadow)"/>
+        <!-- Paper lines -->
+        <line x1="4" y1="60" x2="40" y2="60" stroke="#ccc" stroke-width="0.4" opacity="0.4"/>
+        <line x1="4" y1="100" x2="40" y2="100" stroke="#ccc" stroke-width="0.4" opacity="0.4"/>
+        <line x1="4" y1="140" x2="40" y2="140" stroke="#ccc" stroke-width="0.4" opacity="0.4"/>
+        <!-- Tip / ember -->
+        <ellipse id="cig-tip" cx="22" cy="13" rx="17" ry="13" fill="url(#tipGrad)"/>
+        <!-- Ash cap -->
+        <ellipse id="cig-ash" cx="22" cy="13" rx="17" ry="13" fill="url(#ashGrad)" opacity="0"/>
+        <!-- Highlight -->
+        <rect x="8" y="25" width="6" height="140" rx="3" fill="white" opacity="0.08"/>
+      </svg>
+    </div>

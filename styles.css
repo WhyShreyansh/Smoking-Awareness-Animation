@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --amber: #c8882a;
+    --ember: #ff6a00;
+    --smoke-white: rgba(220,215,205,0.15);
+    --text-white: #e8e0d0;
+    --red-warning: #d63b2f;
+  }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    background: #0a0a0a;
+    overflow-x: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--text-white);
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  #cursor {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+    mix-blend-mode: screen;
+  }
+
+  /* Scroll container */
+  #scroll-container {
+    height: 600vh;
+    position: relative;
+  }
+
+  /* Sticky scene wrapper */
+  #scene {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Background radial spotlight */
+  #spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 50% 55%, #1a1510 0%, #0a0a0a 70%);
+    z-index: 0;
+    transition: background 0.5s;
+  }
+
+  /* Canvas for smoke */
+  #smoke-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* Cigarette SVG wrapper */
+  #cigarette-wrap {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+  }
+
+  #cigarette-svg {
+    width: 44px;
+    height: 280px;
+    filter: drop-shadow(0 0 18px rgba(200,136,42,0.3));
+    transform-origin: center bottom;
+  }
+
+  /* Human silhouette */
+  #human-wrap {
+    position: absolute;
+    right: 8%;
+    bottom: 0;
+    z-index: 4;
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  #human-svg {
+    width: 340px;
+    height: 520px;
+  }
+
+  /* Scene labels */
+  .scene-label {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+
+  .scene-label .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(200,136,42,0.4);
+  }
+
+  .scene-label .title {
+    font-size: clamp(13px, 1.6vw, 18px);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-white);
+    margin-top: 4px;
+    font-weight: 300;
+  }
