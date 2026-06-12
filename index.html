@@ -312,3 +312,18 @@ function setScene(n) {
   }, 300);
   progDots.forEach((d, i) => d.classList.toggle('active', i === n));
 }
+
+// ─── ANIMATION LOOP ───────────────────────────────────────────────────────────
+let raf;
+let rafT = 0;
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+// Apply all transforms to cigarette
+function applyCigTransform() {
+  cigWrap.style.transform = `translate(${cigX}px, ${cigY}px) scale(${cigScale})`;
+  cigSVG.style.transform = `rotateY(${rotationAngle}deg)`;
+}
