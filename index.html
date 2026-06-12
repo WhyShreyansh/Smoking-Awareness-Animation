@@ -288,3 +288,27 @@ const brandColors = [
   { filter: '#4a3020', paper: '#e8e0d0', band: '#302010' }, // dark brand
   { filter: '#888060', paper: '#dedad0', band: '#666050' }, // worn/used
 ];
+
+// ─── SCENE DATA ───────────────────────────────────────────────────────────────
+const scenes = [
+  { num: '01', title: 'ONE CIGARETTE. IT STARTS.' },
+  { num: '02', title: 'IT CHANGES. AGAIN AND AGAIN.' },
+  { num: '03', title: 'IT GOES TO YOU.' },
+  { num: '04', title: 'YOU LIGHT IT. YOU INHALE.' },
+  { num: '05', title: 'WHAT YOU BREATHE IN, STAYS.' },
+  { num: '06', title: 'THE TRUTH REMAINS.' },
+];
+
+let currentScene = 0;
+
+function setScene(n) {
+  if (n === currentScene) return;
+  currentScene = n;
+  sceneLabel.style.opacity = '0';
+  setTimeout(() => {
+    labelNum.textContent = scenes[n].num;
+    labelTitle.textContent = scenes[n].title;
+    sceneLabel.style.opacity = n < 5 ? '1' : '0';
+  }, 300);
+  progDots.forEach((d, i) => d.classList.toggle('active', i === n));
+}
