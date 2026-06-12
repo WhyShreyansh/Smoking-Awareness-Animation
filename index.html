@@ -327,3 +327,18 @@ function applyCigTransform() {
   cigWrap.style.transform = `translate(${cigX}px, ${cigY}px) scale(${cigScale})`;
   cigSVG.style.transform = `rotateY(${rotationAngle}deg)`;
 }
+
+// Update burn/ash appearance
+function updateBurn(p) {
+  burnProgress = clamp(p, 0, 1);
+  const ashH = burnProgress * 130;
+  cigAsh.setAttribute('rx', 17);
+  cigAsh.setAttribute('ry', clamp(ashH / 2, 0, 60));
+  cigAsh.setAttribute('cy', 13 + ashH / 2);
+  cigAsh.style.opacity = burnProgress * 0.9;
+  // Shorten paper visually
+  const paperNewY = 18 + burnProgress * 60;
+  const paperNewH = 168 - burnProgress * 60;
+  cigPaper.setAttribute('y', paperNewY);
+  cigPaper.setAttribute('height', Math.max(paperNewH, 30));
+}
