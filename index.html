@@ -271,4 +271,11 @@ const sceneLabel  = document.getElementById('scene-label');
 const scrollHint  = document.getElementById('scroll-hint');
 const progDots    = document.querySelectorAll('.prog-dot');
 
-    
+    // ─── CIGARETTE STATE ──────────────────────────────────────────────────────────
+let rotationAngle = 0;        // CSS Y rotation degrees
+let cigX = 0, cigY = 0;       // translation from center
+let cigScale = 1;
+let burnProgress = 0;         // 0..1 how burnt the cigarette is
+let morphProgress = 0;        // 0..1 current morph step
+let morphStep = 0;            // which brand variant 0-4
+let emberIntensity = 0;       // 0..1
