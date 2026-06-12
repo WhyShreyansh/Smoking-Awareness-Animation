@@ -131,3 +131,36 @@
     margin-top: 4px;
     font-weight: 300;
   }
+
+   /* Scroll progress bar */
+  #progress-bar {
+    position: fixed;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .prog-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #444;
+    margin: 0 28px;
+    position: relative;
+    transition: background 0.4s;
+  }
+
+  .prog-dot::before {
+    content: attr(data-n);
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #555;
+    font-family: 'Bebas Neue', sans-serif;
+  }
