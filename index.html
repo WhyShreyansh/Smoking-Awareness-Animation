@@ -279,3 +279,12 @@ let burnProgress = 0;         // 0..1 how burnt the cigarette is
 let morphProgress = 0;        // 0..1 current morph step
 let morphStep = 0;            // which brand variant 0-4
 let emberIntensity = 0;       // 0..1
+
+// Brand color palettes for morphing
+const brandColors = [
+  { filter: '#c8a06a', paper: '#f0ece0', band: '#b07830' }, // default
+  { filter: '#b8403a', paper: '#f0ece0', band: '#8a2820' }, // red brand
+  { filter: '#1a3a6a', paper: '#eeeae0', band: '#0a2050' }, // blue brand
+  { filter: '#4a3020', paper: '#e8e0d0', band: '#302010' }, // dark brand
+  { filter: '#888060', paper: '#dedad0', band: '#666050' }, // worn/used
+];
