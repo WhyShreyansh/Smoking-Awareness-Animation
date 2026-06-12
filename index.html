@@ -342,3 +342,16 @@ function updateBurn(p) {
   cigPaper.setAttribute('y', paperNewY);
   cigPaper.setAttribute('height', Math.max(paperNewH, 30));
 }
+
+// Update brand colors
+function updateBrandColor(from, to, t) {
+  const f = brandColors[from];
+  const tk = brandColors[to];
+  function blendHex(h1, h2, t) {
+    const c1 = hexToRgb(h1), c2 = hexToRgb(h2);
+    return `rgb(${Math.round(lerp(c1[0],c2[0],t))},${Math.round(lerp(c1[1],c2[1],t))},${Math.round(lerp(c1[2],c2[2],t))})`;
+  }
+  // Update SVG gradients dynamically
+  document.querySelector('#filterGrad stop:first-child').setAttribute('stop-color', blendHex(f.filter, tk.filter, t));
+  document.querySelector('#filterGrad stop:last-child').setAttribute('stop-color', blendHex(f.band, tk.band, t));
+}
