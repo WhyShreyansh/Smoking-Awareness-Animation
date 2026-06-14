@@ -367,3 +367,176 @@ function updateEmber(intensity, x, y) {
   emberGlow.style.left = (x - 30) + 'px';
   emberGlow.style.top = (y - 30) + 'px';
 }
+
+function onScroll() {
+  const scrollY = window.scrollY;
+  const p = clamp(scrollY / TOTAL_SCROLL, 0, 1); // 0..1 global progress
+
+  // Scene boundaries (each scene = 1/6)
+  const s = p * 6; // 0..6
+  const sceneIdx = Math.min(Math.floor(s), 5);
+  const sceneP = s - sceneIdx; // 0..1 within scene
+
+  setScene(sceneIdx);
+
+  // Hide scroll hint after first scroll
+  if (scrollY > 50) scrollHint.style.opacity = '0';
+  else scrollHint.style.opacity = '1';
+
+  // ── SCENE 0: Rotation ─────────────────────────────────────────────────
+  if (sceneIdx === 0) {
+    const r = easeInOut(sceneP);
+    rotationAngle = sceneP * 720; // continuous 2 full rotations
+    cigX = 0; cigY = 0; cigScale = 1;
+    updateBurn(0);
+    updateBrandColor(0, 0, 0);
+    humanWrap.style.opacity = '0';
+    humanWrap.style.transform = 'translateX(60px)';
+    emberIntensity = 0;
+    smokeActive = false;
+    smokeGlobalAlpha = 0;
+    warningText.style.opacity = '0';
+    warningText.style.filter = '';
+    spotlight.style.background = 'radial-gradient(ellipse 60% 70% at 50% 55%, #1a1510 0%, #0a0a0a 70%)';
+  }
+
+  // ── SCENE 1: Brand transformation (morph) ─────────────────────────────
+  else if (sceneIdx === 1) {
+    rotationAngle = 720 + sceneP * 1440; // keeps spinning
+    cigX = 0; cigY = 0; cigScale = 1;
+    const step = sceneP * 4;
+    const fromBrand = Math.min(Math.floor(step), 3);
+    const toBrand = Math.min(fromBrand + 1, 4);
+    const morphT = easeInOut(step - fromBrand);
+    updateBrandColor(fromBrand, toBrand, morphT);
+    updateBurn(sceneP * 0.25);
+    humanWrap.style.opacity = '0';
+    emberIntensity = 0;
+    smokeActive = false;
+    smokeGlobalAlpha = 0;
+    warningText.style.opacity = '0';
+    spotlight.style.background = 'radial-gradient(ellipse 60% 70% at 50% 55%, #1a1510 0%, #0a0a0a 70%)';
+  }
+
+  // ── SCENE 2: Cigarette moves toward human ─────────────────────────────
+  else if (sceneIdx === 2) {
+    const ep = easeOut(sceneP);
+    // Move right and slightly down toward mouth area
+    const targetX = window.innerWidth * 0.28;
+    const targetY = window.innerHeight * 0.08;
+    cigX = ep * targetX;
+    cigY = ep * targetY;
+    // Slow down rotation
+    rotationAngle = 720 + 1440 - ep * 1440 + sceneP * 180;
+    cigScale = lerp(1, 0.7, ep);
+    updateBurn(lerp(0.25, 0.4, sceneP));
+    updateBrandColor(4, 4, 0);
+    // Fade in human
+    humanWrap.style.opacity = easeOut(sceneP);
+    humanWrap.style.transform = `translateX(${lerp(60, 0, ep)}px)`;
+    emberIntensity = 0;
+    smokeActive = false;
+    smokeGlobalAlpha = 0;
+    warningText.style.opacity = '0';
+    spotlight.style.background = `radial-gradient(ellipse ${lerp(60,80,ep)}% ${lerp(70,90,ep)}% at ${lerp(50,65,ep)}% 55%, #1e1812 0%, #0a0a0a 70%)`;
+  }
+
+  // ── SCENE 3: Light up + first smoke ───────────────────────────────────
+  else if (sceneIdx === 3) {
+    const ep = easeInOut(sceneP);
+    const targetX = window.innerWidth * 0.28;
+    const targetY = window.innerHeight * 0.08;
+    cigX = targetX;
+    cigY = targetY;
+    rotationAngle = sceneP * 15 * Math.sin(sceneP * Math.PI * 3); // subtle breathing
+    cigScale = 0.7;
+    updateBurn(lerp(0.4, 0.65, sceneP));
+    updateBrandColor(4, 4, 0);
+    humanWrap.style.opacity = '1';
+    humanWrap.style.transform = 'translateX(0)';
+
+    // Ember lighting up
+    emberIntensity = sceneP < 0.3 ? easeOut(sceneP / 0.3) : 1;
+    // Position ember at cigarette tip
+    const cigRect = cigWrap.getBoundingClientRect();
+    const ex = cigRect.left + cigRect.width / 2;
+    const ey = cigRect.top + 10 * cigScale;
+    updateEmber(emberIntensity * 0.9, ex, ey);
+
+    // Start thin smoke
+    if (sceneP > 0.2) {
+      smokeActive = true;
+      smokePhase = 0;
+      smokeGlobalAlpha = (sceneP - 0.2) / 0.8;
+      smokeOriginX = ex;
+      smokeOriginY = ey;
+    } else {
+      smokeActive = false;
+      smokeGlobalAlpha = 0;
+    }
+    warningText.style.opacity = '0';
+    spotlight.style.background = 'radial-gradient(ellipse 80% 90% at 65% 55%, #201a10 0%, #0a0a0a 70%)';
+  }
+
+  // ── SCENE 4: Smoke expansion ───────────────────────────────────────────
+  else if (sceneIdx === 4) {
+    const ep = easeInOut(sceneP);
+    const targetX = window.innerWidth * 0.28;
+    const targetY = window.innerHeight * 0.08;
+    cigX = targetX;
+    cigY = targetY;
+    rotationAngle = 0;
+    cigScale = lerp(0.7, 0, ep); // cigarette fades out
+    cigWrap.style.opacity = (1 - ep);
+    updateBurn(0.65);
+    // Human fades away
+    humanWrap.style.opacity = Math.max(0, 1 - ep * 1.5);
+    // Smoke thickens
+    smokeActive = true;
+    smokePhase = 1;
+    smokeGlobalAlpha = Math.min(1, 0.6 + ep * 0.4);
+    // Ember fades
+    emberIntensity = Math.max(0, 1 - ep * 2);
+    const cigRect = cigWrap.getBoundingClientRect();
+    updateEmber(emberIntensity * 0.5, cigRect.left + cigRect.width / 2, cigRect.top + 10);
+    // Center smoke origin
+    smokeOriginX = lerp(cigRect.left + cigRect.width / 2, W / 2, ep);
+    smokeOriginY = lerp(cigRect.top + 10, H * 0.6, ep);
+    warningText.style.opacity = '0';
+    spotlight.style.background = `radial-gradient(ellipse ${lerp(80,100,ep)}% ${lerp(90,100,ep)}% at 50% 50%, #181410 0%, #080808 100%)`;
+  }
+
+  // ── SCENE 5: Message formation ─────────────────────────────────────────
+  else if (sceneIdx === 5) {
+    const ep = easeInOut(sceneP);
+    cigWrap.style.opacity = '0';
+    humanWrap.style.opacity = '0';
+    smokeActive = true;
+    smokePhase = 1;
+    smokeGlobalAlpha = Math.max(0.3, 1 - ep * 0.5);
+    smokeOriginX = W / 2 + (Math.random() - 0.5) * 100;
+    smokeOriginY = H * 0.7;
+    emberIntensity = 0;
+    updateEmber(0, 0, 0);
+    // Warning text emerges
+    warningText.style.opacity = easeOut(sceneP);
+    warningText.style.filter = `blur(${lerp(12, 0, easeOut(sceneP))}px)`;
+    spotlight.style.background = 'radial-gradient(ellipse 100% 100% at 50% 50%, #100e0a 0%, #060606 100%)';
+    sceneLabel.style.opacity = '0';
+  }
+
+  // Reset cigarette opacity on other scenes
+  if (sceneIdx < 4) cigWrap.style.opacity = '1';
+}
+
+// Also run on load
+onScroll();
+
+// ─── RESIZE ───────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  onScroll();
+});
+</script>
+</body>
+</html>
