@@ -222,3 +222,15 @@
     display: block;
     line-height: 1;
   }
+
+  /* Ember glow overlay */
+  #ember-glow {
+    position: absolute;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,106,0,0.9) 0%, rgba(200,80,0,0.4) 40%, transparent 70%);
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(2px);
+  }
