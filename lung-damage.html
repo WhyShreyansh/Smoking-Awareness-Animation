@@ -143,3 +143,13 @@ function makeLobe(rx, ry, rz, segs) {
   geo.computeVertexNormals();
   return geo;
 }
+
+// ─── LUNG MATERIAL ────────────────────────────────────────────────────────────
+// We use MeshStandardMaterial and animate its properties via GSAP
+const lungMat = new THREE.MeshStandardMaterial({
+  color: new THREE.Color(0xff9090),      // healthy pink
+  roughness: 0.62,
+  metalness: 0.04,
+  emissive: new THREE.Color(0x220000),
+  emissiveIntensity: 0.08,
+});
