@@ -118,3 +118,28 @@ scene.add(fillLight);
 const rimLight = new THREE.DirectionalLight(0xff6a00, 0.0);
 rimLight.position.set(0, -3, -4);
 scene.add(rimLight);
+
+// ─── LUNG GEOMETRY HELPERS ────────────────────────────────────────────────────
+// Each lobe = scaled ellipsoid (SphereGeometry) with custom deformation
+function makeLobe(rx, ry, rz, segs) {
+  const geo = new THREE.SphereGeometry(1, segs, segs);
+  // Flatten bottom slightly, puff top
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const y = pos.getY(i);
+    // carve inside face (medial side) flat
+    const x = pos.getX(i);
+    const z = pos.getZ(i);
+    // organic noise deformation
+    const noise = Math.sin(x * 4.5 + y * 3.2) * 0.04
+                + Math.cos(z * 3.8 + y * 2.9) * 0.03;
+    pos.setXYZ(i,
+      x * rx * (1 + noise),
+      y * ry * (1 + noise * 0.5),
+      z * rz * (1 + noise * 0.7)
+    );
+  }
+  pos.needsUpdate = true;
+  geo.computeVertexNormals();
+  return geo;
+}
