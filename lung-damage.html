@@ -50,3 +50,18 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top  = e.clientY + 'px';
 });
+
+// ─── UI REFS ──────────────────────────────────────────────────────────────────
+const stageNum      = document.getElementById('stage-num');
+const stageTitle    = document.getElementById('stage-title');
+const warningText   = document.getElementById('warning-text');
+const damageBarFill = document.getElementById('damage-bar-fill');
+const damageLabel   = document.getElementById('damage-label');
+const progDots      = document.querySelectorAll('.prog-dot');
+
+const STAGES = [
+  { num: '01', title: 'Healthy Lungs',    numColor: '#c8882a', damage: 0   },
+  { num: '02', title: 'Mild Damage',      numColor: '#b87030', damage: 30  },
+  { num: '03', title: 'Moderate Damage',  numColor: '#a04a20', damage: 60  },
+  { num: '04', title: 'Severe Damage',    numColor: '#d63b2f', damage: 100 },
+];
