@@ -65,3 +65,21 @@ const STAGES = [
   { num: '03', title: 'Moderate Damage',  numColor: '#a04a20', damage: 60  },
   { num: '04', title: 'Severe Damage',    numColor: '#d63b2f', damage: 100 },
 ];
+
+function setStageUI(idx) {
+  const s = STAGES[idx];
+  stageNum.textContent  = s.num;
+  stageTitle.textContent = s.title;
+  stageNum.style.color = s.numColor;
+  stageNum.style.textShadow = `0 0 40px ${s.numColor}88`;
+  damageBarFill.style.width = s.damage + '%';
+  if (idx === 3) {
+    damageLabel.style.color = '#d63b2f';
+  } else {
+    damageLabel.style.color = '#555';
+  }
+  progDots.forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}
+setStageUI(0);
