@@ -178,3 +178,17 @@ const trachMat = new THREE.MeshStandardMaterial({ color: 0xcc8888, roughness: 0.
 const trachea  = new THREE.Mesh(trachGeo, trachMat);
 trachea.position.set(0, 1.6, 0);
 lungGroup.add(trachea);
+
+// Bronchi branches
+function makeBronchus(fromX, toX, fromY, toY) {
+  const dir = new THREE.Vector3(toX - fromX, toY - fromY, 0).normalize();
+  const len = Math.sqrt((toX-fromX)**2 + (toY-fromY)**2);
+  const geo = new THREE.CylinderGeometry(0.07, 0.10, len, 10);
+  const mesh = new THREE.Mesh(geo, trachMat.clone());
+  mesh.position.set((fromX+toX)/2, (fromY+toY)/2, 0);
+  mesh.rotation.z = -Math.atan2(toX - fromX, toY - fromY);
+  lungGroup.add(mesh);
+  return mesh;
+}
+makeBronchus(0, -1.45, 1.1, 0.85);
+makeBronchus(0,  1.45, 1.1, 0.8 );
