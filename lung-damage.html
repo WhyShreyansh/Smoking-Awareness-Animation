@@ -83,3 +83,21 @@ function setStageUI(idx) {
   });
 }
 setStageUI(0);
+
+// ─── THREE.JS SETUP ───────────────────────────────────────────────────────────
+const canvas = document.getElementById('three-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x060608);
+scene.fog = new THREE.FogExp2(0x060608, 0.04);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(0, 0.5, 9);
+camera.lookAt(0, 0, 0);
