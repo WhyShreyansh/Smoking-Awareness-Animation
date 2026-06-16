@@ -1,0 +1,7 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --amber: #c8882a;
+    --ember: #ff6a00;
+    --text-white: #e8e0d0;
+    --red-warning: #d63b2f;
+  }
