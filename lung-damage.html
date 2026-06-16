@@ -327,3 +327,58 @@ function applyLungColor(stage) {
     gsap.to(m.material, { emissiveIntensity: c.emissiveI, roughness: c.rough, duration: 2.2 });
   });
 }
+
+function goToStage(idx) {
+  if (idx === currentStage) return;
+  currentStage = idx;
+  setStageUI(idx);
+
+  applyLungColor(idx);
+
+  // Stage 0 – Healthy
+  if (idx === 0) {
+    gsap.to(gsapLungState, { breathAmp: 0.045, breathSpeed: 1.0, smokeAlpha: 0, damage: 0, spotCount: 0, duration: 2 });
+    gsap.to(keyLight, { intensity: 1.2, duration: 2 });
+    gsap.to(rimLight, { intensity: 0.0, duration: 2 });
+    gsap.to(ambientLight.color, { r: 1, g: 0.93, b: 0.87, duration: 2 });
+    gsap.to(scene.fog, { density: 0.04, duration: 2 });
+    gsap.to(gsapCamState, { z: 9, y: 0.5, duration: 2.5, ease: 'power2.inOut' });
+    warningText.style.opacity = '0';
+  }
+  // Stage 1 – Mild
+  else if (idx === 1) {
+    gsap.to(gsapLungState, { breathAmp: 0.033, breathSpeed: 0.82, smokeAlpha: 0.18, damage: 0.3, spotCount: 22, duration: 2.8 });
+    gsap.to(keyLight, { intensity: 0.9, duration: 2 });
+    gsap.to(rimLight, { intensity: 0.15, duration: 2 });
+    gsap.to(scene.fog, { density: 0.055, duration: 3 });
+    gsap.to(gsapCamState, { z: 8.2, y: 0.3, duration: 2.5, ease: 'power2.inOut' });
+    warningText.style.opacity = '0';
+  }
+  // Stage 2 – Moderate
+  else if (idx === 2) {
+    gsap.to(gsapLungState, { breathAmp: 0.019, breathSpeed: 0.58, smokeAlpha: 0.5, damage: 0.6, spotCount: 55, duration: 3 });
+    gsap.to(keyLight, { intensity: 0.55, duration: 2 });
+    gsap.to(rimLight, { intensity: 0.45, duration: 2 });
+    gsap.to(ambientLight.color, { r: 0.6, g: 0.35, b: 0.25, duration: 2.5 });
+    gsap.to(scene.fog, { density: 0.075, duration: 3 });
+    gsap.to(gsapCamState, { z: 7.5, y: 0.1, duration: 2.5, ease: 'power2.inOut' });
+    warningText.style.opacity = '0';
+  }
+  // Stage 3 – Severe
+  else if (idx === 3) {
+    gsap.to(gsapLungState, { breathAmp: 0.007, breathSpeed: 0.30, smokeAlpha: 1.0, damage: 1.0, spotCount: MAX_SPOTS, duration: 3.5 });
+    gsap.to(keyLight, { intensity: 0.2, duration: 2.5 });
+    gsap.to(rimLight, { intensity: 0.9, duration: 2.5 });
+    gsap.to(ambientLight.color, { r: 0.25, g: 0.1, b: 0.08, duration: 2.5 });
+    gsap.to(scene.fog, { density: 0.12, duration: 3 });
+    gsap.to(gsapCamState, { z: 7.0, y: -0.1, duration: 3, ease: 'power2.inOut' });
+    // Warning fades in after a short delay
+    gsap.to(warningText, { opacity: 1, duration: 2.4, delay: 2.8, ease: 'power2.out',
+      onStart() { warningText.style.filter = 'blur(16px)'; },
+      onUpdate() {
+        const p = this.progress();
+        warningText.style.filter = `blur(${(1 - p) * 16}px)`;
+      }
+    });
+  }
+}
