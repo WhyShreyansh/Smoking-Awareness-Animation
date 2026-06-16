@@ -241,3 +241,17 @@ const smokeAlphas    = new Float32Array(SMOKE_COUNT);
 const smokeLife      = new Float32Array(SMOKE_COUNT);
 const smokeVel       = [];
 const smokeMaxLife   = [];
+
+for (let i = 0; i < SMOKE_COUNT; i++) {
+  smokeLife[i]    = Math.random(); // stagger
+  smokeMaxLife[i] = 80 + Math.random() * 80;
+  smokeVel.push({
+    x: (Math.random() - 0.5) * 0.015,
+    y:  0.008 + Math.random() * 0.012,
+    z: (Math.random() - 0.5) * 0.015,
+  });
+  smokePositions[i*3]   = (Math.random() - 0.5) * 5;
+  smokePositions[i*3+1] = (Math.random() - 0.5) * 3;
+  smokePositions[i*3+2] = (Math.random() - 0.5) * 2;
+  smokeAlphas[i] = 0;
+}
