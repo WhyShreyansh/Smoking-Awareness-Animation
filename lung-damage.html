@@ -228,3 +228,8 @@ function makeSpot(lobe) {
   spotGroup.add(mesh);
   return mesh;
 }
+
+const spots = [];
+for (let i = 0; i < MAX_SPOTS; i++) {
+  spots.push(makeSpot(i < MAX_SPOTS / 2 ? 'right' : 'left'));
+}
