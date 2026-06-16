@@ -291,3 +291,9 @@ const smokeMat = new THREE.ShaderMaterial({
   depthWrite: false,
   blending: THREE.AdditiveBlending,
 });
+
+const smokeParticles = new THREE.Points(smokeGeo, smokeMat);
+scene.add(smokeParticles);
+
+let smokeGlobalAlpha  = 0;
+let smokeSpawnRadius  = 1.5;
