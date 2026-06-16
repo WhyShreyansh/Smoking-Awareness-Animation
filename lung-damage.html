@@ -200,3 +200,31 @@ const spotGroup = new THREE.Group();
 scene.add(spotGroup);
 
 const spotGeo = new THREE.SphereGeometry(0.05, 8, 8);
+
+function makeSpot(lobe) {
+  // Random point on lobe surface approximation
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x080808,
+    roughness: 0.9,
+    emissive: new THREE.Color(0x0a0000),
+    emissiveIntensity: 0.1,
+  });
+  const mesh = new THREE.Mesh(spotGeo, mat);
+
+  const theta = Math.random() * Math.PI * 2;
+  const phi   = Math.acos(2 * Math.random() - 1);
+  const lx    = lobe === 'right' ? -1.45 : 1.45;
+  const rx    = lobe === 'right' ? 1.35  : 1.18;
+  const ry    = lobe === 'right' ? 1.9   : 1.75;
+  const rz    = lobe === 'right' ? 1.0   : 0.95;
+
+  const r = 0.96; // slightly inside surface
+  mesh.position.set(
+    lx + rx * r * Math.sin(phi) * Math.cos(theta),
+         ry * r * Math.cos(phi) + (lobe === 'right' ? 0.1 : 0),
+         rz * r * Math.sin(phi) * Math.sin(theta)
+  );
+  mesh.scale.setScalar(0.01); // invisible; scaled up by GSAP
+  spotGroup.add(mesh);
+  return mesh;
+}
