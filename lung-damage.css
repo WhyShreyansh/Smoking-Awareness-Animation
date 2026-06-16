@@ -13,3 +13,11 @@
     cursor: none;
     width: 100vw; height: 100vh;
   }
+  #cursor {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--amber);
+    position: fixed; pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    mix-blend-mode: screen;
+    transition: transform 0.1s;
+  }
