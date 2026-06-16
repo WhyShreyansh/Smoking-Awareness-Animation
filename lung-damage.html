@@ -305,3 +305,7 @@ let breathAmplitude   = 0.045; // reduced as damage grows
 let breathSpeed       = 1.0;
 let spotsVisible      = 0;     // 0..MAX_SPOTS
 let lungDamage        = 0.0;   // 0..1
+
+// Shared refs for GSAP targets
+const gsapLungState = { damage: 0, spotCount: 0, breathAmp: 0.045, breathSpeed: 1.0, smokeAlpha: 0, exposure: 1.1 };
+const gsapCamState  = { fov: 45, y: 0.5, z: 9 };
