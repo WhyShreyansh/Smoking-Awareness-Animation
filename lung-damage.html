@@ -192,3 +192,11 @@ function makeBronchus(fromX, toX, fromY, toY) {
 }
 makeBronchus(0, -1.45, 1.1, 0.85);
 makeBronchus(0,  1.45, 1.1, 0.8 );
+
+// ─── BLACK SPOT SYSTEM ────────────────────────────────────────────────────────
+// Small dark spheres scattered over lung surfaces, scaled up over time
+const MAX_SPOTS = 90;
+const spotGroup = new THREE.Group();
+scene.add(spotGroup);
+
+const spotGeo = new THREE.SphereGeometry(0.05, 8, 8);
