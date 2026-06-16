@@ -309,3 +309,21 @@ let lungDamage        = 0.0;   // 0..1
 // Shared refs for GSAP targets
 const gsapLungState = { damage: 0, spotCount: 0, breathAmp: 0.045, breathSpeed: 1.0, smokeAlpha: 0, exposure: 1.1 };
 const gsapCamState  = { fov: 45, y: 0.5, z: 9 };
+
+// ─── STAGE TRANSITION GSAP ────────────────────────────────────────────────────
+// Lung colors for each stage
+const LUNG_COLORS = [
+  { color: 0xff9090, emissive: 0x220000, emissiveI: 0.08, rough: 0.62 }, // healthy
+  { color: 0xd06060, emissive: 0x280600, emissiveI: 0.10, rough: 0.65 }, // mild
+  { color: 0x804040, emissive: 0x200800, emissiveI: 0.12, rough: 0.70 }, // moderate
+  { color: 0x2a1818, emissive: 0x050000, emissiveI: 0.05, rough: 0.88 }, // severe
+];
+
+function applyLungColor(stage) {
+  const c = LUNG_COLORS[stage];
+  [rightLung, leftLung].forEach(m => {
+    gsap.to(m.material.color, { r: ((c.color >> 16) & 0xff) / 255, g: ((c.color >> 8) & 0xff) / 255, b: (c.color & 0xff) / 255, duration: 2.2, ease: 'power2.inOut' });
+    gsap.to(m.material.emissive, { r: ((c.emissive >> 16) & 0xff) / 255, g: ((c.emissive >> 8) & 0xff) / 255, b: (c.emissive & 0xff) / 255, duration: 2.2 });
+    gsap.to(m.material, { emissiveIntensity: c.emissiveI, roughness: c.rough, duration: 2.2 });
+  });
+}
