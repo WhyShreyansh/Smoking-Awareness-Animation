@@ -5,3 +5,11 @@
     --text-white: #e8e0d0;
     --red-warning: #d63b2f;
   }
+  body {
+    background: #080808;
+    overflow: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--text-white);
+    cursor: none;
+    width: 100vw; height: 100vh;
+  }
