@@ -259,3 +259,35 @@ for (let i = 0; i < SMOKE_COUNT; i++) {
 const smokeGeo = new THREE.BufferGeometry();
 smokeGeo.setAttribute('position', new THREE.BufferAttribute(smokePositions, 3));
 smokeGeo.setAttribute('alpha',    new THREE.BufferAttribute(smokeAlphas,    1));
+
+// Custom shader material so each particle fades individually
+const smokeMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uGlobalAlpha: { value: 0.0 },
+    uColor:       { value: new THREE.Color(0.55, 0.52, 0.50) },
+  },
+  vertexShader: `
+    attribute float alpha;
+    varying float vAlpha;
+    void main() {
+      vAlpha = alpha;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = clamp(280.0 / -mv.z, 12.0, 90.0);
+      gl_Position  = projectionMatrix * mv;
+    }
+  `,
+  fragmentShader: `
+    uniform float uGlobalAlpha;
+    uniform vec3  uColor;
+    varying float vAlpha;
+    void main() {
+      float d = length(gl_PointCoord - vec2(0.5));
+      if (d > 0.5) discard;
+      float a = smoothstep(0.5, 0.15, d) * vAlpha * uGlobalAlpha;
+      gl_FragColor = vec4(uColor, a);
+    }
+  `,
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+});
