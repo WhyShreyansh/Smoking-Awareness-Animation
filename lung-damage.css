@@ -33,3 +33,11 @@
     text-align: center; z-index: 10;
     pointer-events: none;
   }
+  #stage-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    letter-spacing: 0.12em; color: var(--amber);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(200,136,42,0.5);
+    transition: opacity 0.6s, color 0.6s;
+  }
