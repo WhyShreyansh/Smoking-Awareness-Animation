@@ -103,3 +103,7 @@
     text-transform: uppercase; color: #555;
     text-align: right; transition: color 0.8s;
   }
+  #damage-bar-wrap {
+    width: 100px; height: 2px; background: #222;
+    margin-left: auto; margin-top: 6px; border-radius: 1px; overflow: hidden;
+  }
