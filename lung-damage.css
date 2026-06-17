@@ -66,3 +66,5 @@
     font-size: 9px; letter-spacing: 0.15em;
     color: #484848; font-family: 'Bebas Neue', sans-serif;
   }
+  .prog-dot.active { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+  .prog-line { height: 1px; width: 48px; background: #222; flex-shrink: 0; }
