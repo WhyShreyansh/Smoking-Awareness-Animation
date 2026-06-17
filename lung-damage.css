@@ -77,3 +77,10 @@
     opacity: 0; pointer-events: none;
     transition: opacity 1.2s;
   }
+  #warning-text .line1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 7vw, 100px);
+    letter-spacing: 0.08em; color: var(--text-white);
+    text-shadow: 0 0 60px rgba(220,215,205,0.25);
+    display: block; line-height: 1;
+  }
