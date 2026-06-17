@@ -96,3 +96,10 @@
     position: fixed; inset: 0; z-index: 5; pointer-events: none;
     background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 0%, rgba(0,0,0,0.55) 100%);
   }
+  /* Stage info bottom-right */
+  #damage-meter {
+    position: fixed; bottom: 80px; right: 40px;
+    z-index: 20; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #555;
+    text-align: right; transition: color 0.8s;
+  }
