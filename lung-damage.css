@@ -59,3 +59,10 @@
     background: #3a3a3a; margin: 0 22px;
     position: relative; transition: background 0.4s, box-shadow 0.4s;
   }
+  .prog-dot::before {
+    content: attr(data-n);
+    position: absolute; top: -20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px; letter-spacing: 0.15em;
+    color: #484848; font-family: 'Bebas Neue', sans-serif;
+  }
