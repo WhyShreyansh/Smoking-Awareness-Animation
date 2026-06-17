@@ -54,3 +54,8 @@
     transform: translateX(-50%);
     z-index: 20; display: flex; align-items: center;
   }
+  .prog-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #3a3a3a; margin: 0 22px;
+    position: relative; transition: background 0.4s, box-shadow 0.4s;
+  }
