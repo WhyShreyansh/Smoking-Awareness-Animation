@@ -382,3 +382,15 @@ function goToStage(idx) {
     });
   }
 }
+
+// ─── AUTO-PLAY TIMELINE ───────────────────────────────────────────────────────
+// Stage durations: 4s healthy, then 5s mild, 5s moderate, forever severe
+const masterTL = gsap.timeline({ delay: 0.8 });
+masterTL
+  .call(() => goToStage(0))
+  .to({}, { duration: 4.5 })  // stay healthy
+  .call(() => goToStage(1))
+  .to({}, { duration: 5.5 })  // mild
+  .call(() => goToStage(2))
+  .to({}, { duration: 5.5 })  // moderate
+  .call(() => goToStage(3));  // severe (no end)
