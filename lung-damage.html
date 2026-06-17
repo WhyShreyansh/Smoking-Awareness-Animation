@@ -394,3 +394,76 @@ masterTL
   .call(() => goToStage(2))
   .to({}, { duration: 5.5 })  // moderate
   .call(() => goToStage(3));  // severe (no end)
+
+  // ─── RENDER LOOP ──────────────────────────────────────────────────────────────
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  const dt = clock.getDelta();
+
+  // Breathing
+  const amp   = gsapLungState.breathAmp;
+  const speed = gsapLungState.breathSpeed;
+  const breathY = 1 + amp * Math.sin(t * speed * Math.PI * 2);
+  const breathX = 1 + amp * 0.6 * Math.sin(t * speed * Math.PI * 2);
+  rightLung.scale.set(breathX, breathY, breathX);
+  leftLung.scale.set(breathX, breathY, breathX);
+
+  // Gentle rotation
+  lungGroup.rotation.y = Math.sin(t * 0.12) * 0.18;
+  lungGroup.rotation.x = Math.sin(t * 0.08) * 0.05;
+
+  // Camera track GSAP state
+  camera.position.z = gsapCamState.z;
+  camera.position.y = gsapCamState.y;
+
+  // Show correct number of spots
+  const targetSpots = Math.round(gsapLungState.spotCount);
+  for (let i = 0; i < MAX_SPOTS; i++) {
+    const visible = i < targetSpots;
+    const targetS = visible ? (0.9 + Math.sin(i * 2.1 + t * 0.3) * 0.15) : 0.01;
+    spots[i].scale.lerp(new THREE.Vector3(targetS, targetS, targetS), 0.04);
+  }
+
+  // Smoke
+  smokeGlobalAlpha = gsapLungState.smokeAlpha;
+  smokeMat.uniforms.uGlobalAlpha.value = smokeGlobalAlpha;
+  smokeSpawnRadius = 1.2 + gsapLungState.damage * 2.5;
+
+  // Update smoke particles
+  for (let i = 0; i < SMOKE_COUNT; i++) {
+    smokeLife[i] += 1;
+    const life    = smokeLife[i];
+    const maxL    = smokeMaxLife[i];
+
+    if (life > maxL) {
+      // Respawn near lung surface
+      const side = Math.random() < 0.5 ? -1.4 : 1.4;
+      smokePositions[i*3]   = side + (Math.random() - 0.5) * smokeSpawnRadius * 0.8;
+      smokePositions[i*3+1] = (Math.random() - 0.5) * 2.5;
+      smokePositions[i*3+2] = (Math.random() - 0.5) * 1.5;
+      smokeVel[i].x = (Math.random() - 0.5) * 0.012;
+      smokeVel[i].y = 0.007 + Math.random() * 0.010;
+      smokeVel[i].z = (Math.random() - 0.5) * 0.012;
+      smokeLife[i]  = 0;
+      smokeMaxLife[i] = 80 + Math.random() * 80;
+      smokeAlphas[i] = 0;
+    } else {
+      // Drift
+      smokePositions[i*3]   += smokeVel[i].x + Math.sin(t + i) * 0.003;
+      smokePositions[i*3+1] += smokeVel[i].y;
+      smokePositions[i*3+2] += smokeVel[i].z;
+      // Fade in/out
+      const lf = life / maxL;
+      smokeAlphas[i] = lf < 0.15 ? lf / 0.15 : lf > 0.75 ? (1 - lf) / 0.25 : 1.0;
+      smokeAlphas[i] *= 0.45;
+    }
+  }
+  smokeGeo.attributes.position.needsUpdate = true;
+  smokeGeo.attributes.alpha.needsUpdate    = true;
+
+  renderer.render(scene, camera);
+}
+animate();
