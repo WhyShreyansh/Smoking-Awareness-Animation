@@ -138,3 +138,16 @@
     color:var(--ink-dim);
     opacity:.55;
   }
+
+  /* finale */
+  .finale .headline{ margin-bottom:.2rem; }
+
+  .cta-wrap{
+    margin-top:2.6rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.1rem;
+    opacity:0;
+    transform:translateY(24px);
+  }
