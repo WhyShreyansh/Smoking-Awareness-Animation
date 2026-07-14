@@ -176,3 +176,10 @@
     animation:glow-pulse 3.2s ease-in-out infinite;
     transition:transform .35s ease;
   }
+
+  .cta-btn:hover{ transform:translateY(-2px) scale(1.02); }
+
+  @keyframes glow-pulse{
+    0%,100%{ box-shadow:0 0 18px 2px rgba(255,120,60,0.25); }
+    50%{ box-shadow:0 0 34px 8px rgba(255,120,60,0.5); }
+  }
