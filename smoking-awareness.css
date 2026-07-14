@@ -53,3 +53,13 @@
     position:relative;
     z-index:3;
   }
+
+  .scene{
+    position:relative;
+    min-height:118vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 6vw;
+    text-align:center;
+  }
