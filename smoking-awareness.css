@@ -118,3 +118,12 @@
     gap:.9rem;
     margin-top:.5rem;
   }
+
+  .stack-lines .line{
+    font-family:'Manrope', sans-serif;
+    font-weight:600;
+    font-size:clamp(1.15rem, 2.6vw, 1.9rem);
+    color:var(--ink);
+    opacity:0;
+    transform:translateY(24px);
+  }
