@@ -1,1 +1,10 @@
-
+:root{
+    --bg-void:   #07070a;
+    --bg-panel:  #101013;
+    --ink:       #f3f1ec;
+    --ink-dim:   #8b8983;
+    --ember:     #ff8a4c;
+    --ember-deep:#ff4f1a;
+    --line:      rgba(243,241,236,0.09);
+    --smoke-tint: rgba(206,204,199,0.5);
+  }
