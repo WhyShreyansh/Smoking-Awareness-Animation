@@ -100,3 +100,14 @@
     transform:translateY(38px);
     filter:blur(6px);
   }
+
+  .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    font-size:clamp(1rem, 1.6vw, 1.25rem);
+    color:var(--ink-dim);
+    opacity:0;
+    transform:translateY(20px);
+    max-width:520px;
+    line-height:1.6;
+  }
