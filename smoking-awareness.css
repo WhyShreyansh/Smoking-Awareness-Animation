@@ -127,3 +127,14 @@
     opacity:0;
     transform:translateY(24px);
   }
+
+  .scene-index{
+    position:absolute;
+    top:6vh;
+    left:6vw;
+    font-family:'Inter', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.28em;
+    color:var(--ink-dim);
+    opacity:.55;
+  }
