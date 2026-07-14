@@ -63,3 +63,13 @@
     padding:6vh 6vw;
     text-align:center;
   }
+
+    .scene.finale{ min-height:170vh; padding-bottom:14vh; }
+
+  .text-block{
+    max-width:720px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.4rem;
+  }
