@@ -48,3 +48,8 @@
     pointer-events:none;
     background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
   }
+
+  main#scroll-content{
+    position:relative;
+    z-index:3;
+  }
