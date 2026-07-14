@@ -84,3 +84,12 @@
     opacity:0;
     transform:translateY(14px);
   }
+
+  .headline{
+    font-family:'Manrope', sans-serif;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size:clamp(2rem, 5.4vw, 4.4rem);
+    color:var(--ink);
+  }
