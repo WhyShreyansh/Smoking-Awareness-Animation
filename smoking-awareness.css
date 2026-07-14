@@ -8,3 +8,16 @@
     --line:      rgba(243,241,236,0.09);
     --smoke-tint: rgba(206,204,199,0.5);
   }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ background:var(--bg-void); scroll-behavior:auto; }
+
+  body{
+    background:var(--bg-void);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
