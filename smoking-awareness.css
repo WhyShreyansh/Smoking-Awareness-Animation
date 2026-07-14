@@ -93,3 +93,10 @@
     font-size:clamp(2rem, 5.4vw, 4.4rem);
     color:var(--ink);
   }
+
+  .headline .reveal-line{
+    display:block;
+    opacity:0;
+    transform:translateY(38px);
+    filter:blur(6px);
+  }
