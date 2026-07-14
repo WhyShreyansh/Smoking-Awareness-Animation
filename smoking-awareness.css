@@ -73,3 +73,14 @@
     align-items:center;
     gap:1.4rem;
   }
+
+  .eyebrow{
+    font-family:'Inter', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    font-weight:500;
+    opacity:0;
+    transform:translateY(14px);
+  }
