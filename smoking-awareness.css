@@ -183,3 +183,10 @@
     0%,100%{ box-shadow:0 0 18px 2px rgba(255,120,60,0.25); }
     50%{ box-shadow:0 0 34px 8px rgba(255,120,60,0.5); }
   }
+
+  .foot-note{
+    font-size:.75rem;
+    color:var(--ink-dim);
+    letter-spacing:.04em;
+    opacity:.6;
+  }
