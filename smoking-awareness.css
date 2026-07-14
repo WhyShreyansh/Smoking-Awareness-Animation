@@ -111,3 +111,10 @@
     max-width:520px;
     line-height:1.6;
   }
+
+  .stack-lines{
+    display:flex;
+    flex-direction:column;
+    gap:.9rem;
+    margin-top:.5rem;
+  }
