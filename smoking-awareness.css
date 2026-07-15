@@ -218,3 +218,8 @@
     background:linear-gradient(to bottom, var(--ink-dim), transparent);
     animation:cue-drop 1.8s ease-in-out infinite;
   }
+  @keyframes cue-drop{
+    0%{ transform:scaleY(0.3); transform-origin:top; opacity:.2; }
+    50%{ transform:scaleY(1); transform-origin:top; opacity:1; }
+    100%{ transform:scaleY(0.3); transform-origin:bottom; opacity:.2; }
+  }
