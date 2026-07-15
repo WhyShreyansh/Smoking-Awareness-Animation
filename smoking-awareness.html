@@ -229,6 +229,29 @@ cigarette.position.set(0,0,0);
 cigarette.rotation.z = 0.18;
 scene.add(cigarette);
 
+/* ash burst (hidden until finale) */
+const ashCount = isMobile ? 60 : 130;
+const ashGeo = new THREE.BufferGeometry();
+const ashPos = new Float32Array(ashCount*3);
+const ashVel = [];
+for(let i=0;i<ashCount;i++){
+  ashPos[i*3]   = 0.6 + (Math.random()-0.5)*0.05;
+  ashPos[i*3+1] = (Math.random()-0.5)*0.05;
+  ashPos[i*3+2] = (Math.random()-0.5)*0.05;
+  ashVel.push({
+    x:(Math.random()-0.5)*0.01,
+    y:-Math.random()*0.012-0.004,
+    z:(Math.random()-0.5)*0.01
+  });
+}
+ashGeo.setAttribute('position', new THREE.BufferAttribute(ashPos,3));
+const ashMat = new THREE.PointsMaterial({
+  size:0.05, map:ashTex, transparent:true, opacity:0, depthWrite:false,
+  blending: THREE.NormalBlending
+});
+const ashPoints = new THREE.Points(ashGeo, ashMat);
+scene.add(ashPoints);
+
 
 
     
