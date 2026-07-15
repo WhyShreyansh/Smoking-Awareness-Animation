@@ -223,3 +223,8 @@
     50%{ transform:scaleY(1); transform-origin:top; opacity:1; }
     100%{ transform:scaleY(0.3); transform-origin:bottom; opacity:.2; }
   }
+
+   @media (max-width: 640px){
+    .scene{ padding:5vh 7vw; }
+    .headline{ font-size:clamp(1.6rem, 8vw, 2.6rem); }
+  }
