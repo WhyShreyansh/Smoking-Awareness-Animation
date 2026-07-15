@@ -158,6 +158,19 @@ const camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHei
 camera.position.set(0, 0, 5);
 
 
+// Lights
+const ambient = new THREE.AmbientLight(0x24242a, 0.6);
+scene.add(ambient);
+
+const rimLight = new THREE.DirectionalLight(0x8ea8c9, 0.35);
+rimLight.position.set(-4, 3, -3);
+scene.add(rimLight);
+
+const emberLight = new THREE.PointLight(0xff7a3d, 2.2, 8, 2);
+emberLight.position.set(0, 0.05, 0.35);
+scene.add(emberLight);
+
+
     
 </body>
 </html>
