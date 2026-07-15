@@ -206,3 +206,9 @@
     transition:opacity .5s ease;
     pointer-events:none;
   }
+  .scroll-cue span{
+    font-size:.65rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
