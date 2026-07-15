@@ -212,3 +212,9 @@
     text-transform:uppercase;
     color:var(--ink-dim);
   }
+  .scroll-cue .stem{
+    width:1px;
+    height:34px;
+    background:linear-gradient(to bottom, var(--ink-dim), transparent);
+    animation:cue-drop 1.8s ease-in-out infinite;
+  }
