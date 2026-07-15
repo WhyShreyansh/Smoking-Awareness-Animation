@@ -224,7 +224,15 @@
     100%{ transform:scaleY(0.3); transform-origin:bottom; opacity:.2; }
   }
 
-   @media (max-width: 640px){
+  @media (max-width: 640px){
     .scene{ padding:5vh 7vw; }
     .headline{ font-size:clamp(1.6rem, 8vw, 2.6rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .headline .reveal-line, .eyebrow, .sub, .stack-lines .line, .cta-wrap{
+      transition:opacity .6s ease !important;
+      transform:none !important;
+      filter:none !important;
+    }
   }
