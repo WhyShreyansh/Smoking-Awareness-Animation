@@ -252,6 +252,43 @@ const ashMat = new THREE.PointsMaterial({
 const ashPoints = new THREE.Points(ashGeo, ashMat);
 scene.add(ashPoints);
 
+// SILHOUETTES  (man + family)
+
+
+function createFigure({ height=1.7, radius=0.24, color=0x050506, opacity=1 }){
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({
+    color, roughness:0.9, metalness:0, transparent:true, opacity
+  });
+  const bodyH = height*0.62;
+  const capsule = new THREE.Mesh(new THREE.CapsuleGeometry(radius, bodyH, 6, 12), mat);
+  capsule.position.y = bodyH/2 + radius;
+  g.add(capsule);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(radius*0.62, 16, 16), mat);
+  head.position.y = bodyH + radius*2 + radius*0.5;
+  g.add(head);
+  g.userData.mat = mat;
+  return g;
+}
+
+const man = createFigure({ height:1.85, radius:0.27, color:0x08080a, opacity:0 });
+man.position.set(0, -0.95, -1.4);
+scene.add(man);
+
+const wife = createFigure({ height:1.68, radius:0.22, color:0x0c0c10, opacity:0 });
+wife.position.set(-1.65, -0.95, -3.4);
+scene.add(wife);
+
+const child = createFigure({ height:1.02, radius:0.16, color:0x0c0c10, opacity:0 });
+child.position.set(1.55, -1.28, -3.6);
+scene.add(child);
+
+const parent = createFigure({ height:1.6, radius:0.23, color:0x0c0c10, opacity:0 });
+parent.position.set(0.05, -1.0, -4.9);
+scene.add(parent);
+
+const family = [wife, child, parent];
+
 
 
     
