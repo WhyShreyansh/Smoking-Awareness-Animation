@@ -290,6 +290,35 @@ scene.add(parent);
 const family = [wife, child, parent];
 
 
+// smoke particles
+
+const smokeCount = isMobile ? 90 : 220;
+const smokeGeo = new THREE.BufferGeometry();
+const smokePos = new Float32Array(smokeCount*3);
+const smokeData = [];
+for(let i=0;i<smokeCount;i++){
+  const r = Math.random();
+  smokePos[i*3]   = 0.62 + (Math.random()-0.5)*0.15;
+  smokePos[i*3+1] = Math.random()*0.3;
+  smokePos[i*3+2] = (Math.random()-0.5)*0.15;
+  smokeData.push({
+    speed: 0.15 + Math.random()*0.18,
+    sway: Math.random()*Math.PI*2,
+    swaySpeed: 0.3 + Math.random()*0.5,
+    swayAmp: 0.15 + Math.random()*0.35,
+    life: Math.random(),
+    target: i % 3 // 0 free rise, 1 -> family cluster
+  });
+}
+smokeGeo.setAttribute('position', new THREE.BufferAttribute(smokePos,3));
+const smokeMat = new THREE.PointsMaterial({
+  size: 0.9, map: smokeTex, transparent:true, opacity:0.22,
+  depthWrite:false, blending: THREE.NormalBlending, color:0xcccac5
+});
+const smokePoints = new THREE.Points(smokeGeo, smokeMat);
+scene.add(smokePoints);
+
+
 
     
 </body>
