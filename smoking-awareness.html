@@ -454,6 +454,19 @@ function updateScene(p){
   emberGlow.material.opacity = 0.85 + t7*0.15 - t8*0.7;
 
 
+    // ------ ASH -----
+   ashMat.opacity = THREE.MathUtils.smoothstep(t8, 0.15, 0.55);
+  if(t8 > 0.12){
+    const arr = ashGeo.attributes.position.array;
+    for(let i=0;i<ashCount;i++){
+      arr[i*3]   += ashVel[i].x;
+      arr[i*3+1] += ashVel[i].y;
+      arr[i*3+2] += ashVel[i].z;
+    }
+    ashGeo.attributes.position.needsUpdate = true;
+  }
+
+
 
     
 </body>
