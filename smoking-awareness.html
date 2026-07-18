@@ -522,6 +522,14 @@ function updateScene(p){
   smokeMat.opacity = THREE.MathUtils.lerp(0.16, 0.34, THREE.MathUtils.clamp(p*1.1,0,1)) * (1 - t8*0.5);
   smokeMat.size = THREE.MathUtils.lerp(0.55, 1.35, spread/2.6);
 
+  /* ---- ROOM DARKENING / FOG ---- */
+  const darkT = THREE.MathUtils.clamp((p - bounds[2]) / (bounds[6]-bounds[2]), 0, 1);
+  const c = lerpColor(0x07070a, 0x020202, darkT*0.85);
+  scene.background.copy(c);
+  scene.fog.color.copy(c);
+  scene.fog.density = THREE.MathUtils.lerp(0.02, 0.09, darkT);
+  ambient.intensity = THREE.MathUtils.lerp(0.6, 0.22, darkT) + t8*0.15;
+
 
 
     
