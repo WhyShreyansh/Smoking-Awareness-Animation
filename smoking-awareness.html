@@ -550,6 +550,16 @@ function updateScene(p){
 updateScene(0);
 
 
+// MASTER SCROLL TRIGGER
+ScrollTrigger.create({
+  trigger: "#scroll-content",
+  start: "top top",
+  end: "bottom bottom",
+  scrub: reduceMotion ? false : 0.55,
+  onUpdate: self => updateScene(self.progress)
+});
+
+
 
     
 </body>
