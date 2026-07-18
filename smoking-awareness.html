@@ -540,6 +540,15 @@ function updateScene(p){
   heartGroup.rotation.y = heartT * Math.PI * 0.4;
   heartGroup.position.set(0.6 - 0.6*heartT, -0.3 + heartT*0.5, 0 - heartT*1.4);
 
+  /* ---- HOUSE (very end) ---- */
+  const houseT = THREE.MathUtils.clamp((t8 - 0.7)/0.3, 0, 1);
+  houseMat.opacity = ease(houseT) * 0.35;
+
+  emberLight.position.copy(cigarette.position).add(new THREE.Vector3(0.6*shrink,0.05,0.35).applyQuaternion(cigarette.quaternion));
+}
+
+updateScene(0);
+
 
 
     
