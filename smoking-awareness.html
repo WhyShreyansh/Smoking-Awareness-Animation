@@ -530,6 +530,16 @@ function updateScene(p){
   scene.fog.density = THREE.MathUtils.lerp(0.02, 0.09, darkT);
   ambient.intensity = THREE.MathUtils.lerp(0.6, 0.22, darkT) + t8*0.15;
 
+  /* ---- HEART (finale) ---- */
+  const heartT = THREE.MathUtils.clamp((t8 - 0.45)/0.35, 0, 1);
+  const heartFade = THREE.MathUtils.clamp((t8 - 0.75)/0.25, 0, 1);
+  const heartScale = ease(heartT) * (1 - heartFade*0.4);
+  heartGroup.scale.setScalar(0.001 + heartScale*0.9);
+  heartMatL.opacity = ease(heartT) * (1-heartFade);
+  heartMatR.opacity = heartMatL.opacity;
+  heartGroup.rotation.y = heartT * Math.PI * 0.4;
+  heartGroup.position.set(0.6 - 0.6*heartT, -0.3 + heartT*0.5, 0 - heartT*1.4);
+
 
 
     
