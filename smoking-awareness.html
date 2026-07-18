@@ -374,6 +374,34 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+// SCENE STATE MACHINE — driven by master scroll progress
+
+const N = 8;
+const bounds = Array.from({length:N+1}, (_,i)=> i/N);
+
+function segT(progress, i){
+  // returns 0..1 local progress within scene i (1-indexed)
+  const a = bounds[i-1], b = bounds[i];
+  return THREE.MathUtils.clamp((progress - a) / (b - a), 0, 1);
+}
+function ease(t){ return t*t*(3-2*t); } // smoothstep
+
+let globalProgress = 0;
+
+function lerpColor(c1, c2, t){ return new THREE.Color(c1).lerp(new THREE.Color(c2), t); }
+
+function updateScene(p){
+  globalProgress = p;
+
+  const t1 = ease(segT(p,1));
+  const t2 = ease(segT(p,2));
+  const t3 = ease(segT(p,3));
+  const t4 = ease(segT(p,4));
+  const t5 = ease(segT(p,5));
+  const t6 = ease(segT(p,6));
+  const t7 = ease(segT(p,7));
+  const t8 = ease(segT(p,8));
+
 
 
     
