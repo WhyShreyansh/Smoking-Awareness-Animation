@@ -488,6 +488,41 @@ function updateScene(p){
   parent.position.z = -4.9 + ease(pT)*0.15;
 
 
+//  ------ SMOKE -----
+  const positions = smokeGeo.attributes.position.array;
+  const spread = THREE.MathUtils.lerp(0.15, 2.6, THREE.MathUtils.clamp((p-bounds[2])/(bounds[5]-bounds[2]),0,1));
+  const towardFamily = THREE.MathUtils.clamp((p - bounds[3]) / (bounds[5]-bounds[3]), 0, 1);
+  const now = performance.now()*0.001;
+
+  for(let i=0;i<smokeCount;i++){
+    const d = smokeData[i];
+    d.life += 0.0032 * (d.speed*3);
+    if(d.life > 1) d.life = 0;
+
+    const baseX = 0.62;
+    const baseY = 0.05;
+    const baseZ = 0;
+
+    let targetX = baseX, targetY = baseY + 3.4, targetZ = baseZ - 1.2;
+    if(d.target === 1){ targetX = -1.4; targetY = -0.2; targetZ = -3.3; }
+    else if(d.target === 2){ targetX = 1.3; targetY = -0.5; targetZ = -3.5; }
+
+    const rise = d.life;
+    const mixToFamily = towardFamily * 0.6;
+
+    const x = THREE.MathUtils.lerp(baseX, targetX, rise*mixToFamily) + Math.sin(now*d.swaySpeed + d.sway)*d.swayAmp*0.25*spread;
+    const y = THREE.MathUtils.lerp(baseY, targetY, rise) ;
+    const z = THREE.MathUtils.lerp(baseZ, targetZ, rise*mixToFamily) + Math.cos(now*d.swaySpeed*0.7 + d.sway)*0.12*spread;
+
+    positions[i*3]   = x;
+    positions[i*3+1] = y;
+    positions[i*3+2] = z;
+  }
+  smokeGeo.attributes.position.needsUpdate = true;
+  smokeMat.opacity = THREE.MathUtils.lerp(0.16, 0.34, THREE.MathUtils.clamp(p*1.1,0,1)) * (1 - t8*0.5);
+  smokeMat.size = THREE.MathUtils.lerp(0.55, 1.35, spread/2.6);
+
+
 
     
 </body>
