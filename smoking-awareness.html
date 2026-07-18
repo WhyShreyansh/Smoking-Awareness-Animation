@@ -472,6 +472,21 @@ function updateScene(p){
   man.position.y = -0.95 + Math.sin(performance.now()*0.0011)*0.012; // idle breathing
   man.rotation.y = THREE.MathUtils.lerp(0, -0.15, t3);
 
+//  ------- FAMILY ------
+  const familyIn = THREE.MathUtils.clamp((p - bounds[2]) / (bounds[3]-bounds[2]) * 1.2, 0, 1);
+  const familyContrastFade = THREE.MathUtils.clamp(1 - t6*1.15, 0, 1);
+  family.forEach((f)=> f.userData.mat.opacity = familyIn * familyContrastFade );
+
+
+  //  ------ scene 5: staggered suffering poses (child -> wife -> parent)
+  const cT = THREE.MathUtils.clamp(t5*3, 0, 1);        // child cough
+  const wT = THREE.MathUtils.clamp(t5*3 - 1, 0, 1);    // wife head down
+  const pT = THREE.MathUtils.clamp(t5*3 - 2, 0, 1);    // parent labored lean
+  child.rotation.x = ease(cT) * 0.35;
+  wife.rotation.x = ease(wT) * 0.22;
+  parent.rotation.x = ease(pT) * 0.28;
+  parent.position.z = -4.9 + ease(pT)*0.15;
+
 
 
     
