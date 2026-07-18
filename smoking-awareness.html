@@ -444,6 +444,15 @@ function updateScene(p){
   }
   camera.lookAt(lookAt);
 
+    // CIGARETTE
+  cigarette.rotation.y = p * Math.PI * 0.6;
+  const burnDown = t8; // shrinks across finale
+  const shrink = THREE.MathUtils.clamp(1 - burnDown*1.35, 0, 1);
+  cigarette.scale.setScalar(shrink);
+  emberMat.emissiveIntensity = 2.2 + Math.sin(performance.now()*0.006)*0.25 + t7*1.6;
+  emberLight.intensity = 2.0 + t7*2.4 - t8*2.0;
+  emberGlow.material.opacity = 0.85 + t7*0.15 - t8*0.7;
+
 
 
     
