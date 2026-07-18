@@ -559,6 +559,17 @@ ScrollTrigger.create({
   onUpdate: self => updateScene(self.progress)
 });
 
+/* fade out scroll cue after first scroll */
+const cue = document.getElementById('scrollCue');
+ScrollTrigger.create({
+  trigger: "#scroll-content",
+  start: "top top",
+  end: "5% top",
+  onLeave: () => gsap.to(cue, { opacity:0, duration:.6 }),
+  onEnterBack: () => gsap.to(cue, { opacity:.65, duration:.6 })
+});
+
+
 
 
     
