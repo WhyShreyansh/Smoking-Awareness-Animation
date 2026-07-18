@@ -402,6 +402,48 @@ function updateScene(p){
   const t7 = ease(segT(p,7));
   const t8 = ease(segT(p,8));
 
+        //  CAMERA
+  let camPos = new THREE.Vector3();
+  let lookAt = new THREE.Vector3(0,0,0);
+
+  if(p <= bounds[1]){ // scene 1: orbit close on cigarette
+    const ang = t1*0.9 - 0.2;
+    camPos.set(Math.sin(ang)*3.4, 0.15, Math.cos(ang)*3.4);
+    lookAt.set(0,0,0);
+  } else if(p <= bounds[2]){ // scene 2: pull back, reveal man
+    camPos.set( THREE.MathUtils.lerp(3.4,4.6,t2)*0.0 + THREE.MathUtils.lerp(1.6,0.6,t2),
+                THREE.MathUtils.lerp(0.15,0.15,t2),
+                THREE.MathUtils.lerp(3.4,5.6,t2) );
+    lookAt.set(0,-0.4,-0.6);
+  } else if(p <= bounds[3]){ // scene 3: wide reveal of family
+    camPos.set( THREE.MathUtils.lerp(0.6,0.15,t3),
+                THREE.MathUtils.lerp(0.15,0.6,t3),
+                THREE.MathUtils.lerp(5.6,9.4,t3) );
+    lookAt.set(0,-0.6,-2.4);
+  } else if(p <= bounds[4]){ // scene 4: smoke drifts, room darkens
+    camPos.set(0.1, THREE.MathUtils.lerp(0.6,0.75,t4), THREE.MathUtils.lerp(9.4,8.4,t4));
+    lookAt.set(0,-0.7,-2.6);
+  } else if(p <= bounds[5]){ // scene 5: slow push into family, subtle suffering
+    camPos.set(THREE.MathUtils.lerp(0.1,-0.3,t5), 0.55, THREE.MathUtils.lerp(8.4,6.6,t5));
+    lookAt.set(0,-0.75,-3.2);
+  } else if(p <= bounds[6]){ // scene 6: contrast — man sharp, family fading
+    camPos.set(THREE.MathUtils.lerp(-0.3,0.5,t6), THREE.MathUtils.lerp(0.55,0.05,t6), THREE.MathUtils.lerp(6.6,4.2,t6));
+    lookAt.set(0,-0.3,-1.2);
+  } else if(p <= bounds[7]){ // scene 7: pull way back, ember brightest
+    camPos.set(0, THREE.MathUtils.lerp(0.05,1.6,t7), THREE.MathUtils.lerp(4.2,13.5,t7));
+    lookAt.set(0,-0.6,-2.8);
+  } else { // scene 8: finale — cigarette burns out, heart, house
+    camPos.set(0, THREE.MathUtils.lerp(1.6,1.1,t8), THREE.MathUtils.lerp(13.5,7.0,t8));
+    lookAt.set(0, THREE.MathUtils.lerp(-0.6,-0.15,t8), THREE.MathUtils.lerp(-2.8,-0.4,t8));
+  }
+
+  if(!reduceMotion){
+    camera.position.lerp(camPos, 1);
+  } else {
+    camera.position.copy(camPos);
+  }
+  camera.lookAt(lookAt);
+
 
 
     
