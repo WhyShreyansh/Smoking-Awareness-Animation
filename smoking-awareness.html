@@ -576,6 +576,30 @@ function animate(){
 }
 animate();
 
+// ----- TEXT REVEALS -----
+document.querySelectorAll('.scene').forEach(section => {
+  const items = section.querySelectorAll('.reveal');
+  if(!items.length) return;
+
+  const tl = gsap.timeline({
+    scrollTrigger:{
+      trigger: section,
+      start: "top 62%",
+      end: "bottom 40%",
+      toggleActions: "play reverse play reverse"
+    }
+  });
+
+  tl.to(items, {
+    opacity: 1,
+    y: 0,
+    filter: reduceMotion ? "none" : "blur(0px)",
+    duration: reduceMotion ? 0.5 : 1.1,
+    ease: "power2.out",
+    stagger: 0.16
+  });
+});
+
 
 
     
