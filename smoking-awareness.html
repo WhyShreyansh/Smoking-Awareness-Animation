@@ -569,6 +569,12 @@ ScrollTrigger.create({
   onEnterBack: () => gsap.to(cue, { opacity:.65, duration:.6 })
 });
 
+// ------ RENDER LOOP ------
+function animate(){
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+animate();
 
 
 
