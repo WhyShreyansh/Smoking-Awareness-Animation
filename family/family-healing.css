@@ -1,0 +1,13 @@
+:root {
+  --void: #08080b;
+  --char: #17151a;
+  --ember: #ff6b3d;
+  --dawn: #ffb37a;
+  --linen: #f7ecdf;
+  --sage: #7c9668;
+  --ink-light: #f5f1ea;
+  --ink-dark: #211c14;
+
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+}
