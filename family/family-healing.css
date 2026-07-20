@@ -96,3 +96,9 @@ body {
   line-height: 1.25;
   letter-spacing: -0.01em;
 }
+
+.line em,
+.line i {
+  font-style: italic;
+  font-weight: 400;
+}
