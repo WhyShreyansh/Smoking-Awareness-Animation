@@ -22,3 +22,11 @@ html {
   scroll-behavior: smooth;
   background: var(--void);
 }
+
+body {
+  background: var(--void);
+  color: var(--ink-light);
+  font-family: var(--font-ui);
+  overflow-x: hidden;
+  transition: color 0.8s ease;
+}
