@@ -40,3 +40,20 @@ body {
   z-index: 0;
   display: block;
 }
+
+/* ---------- Signature thread glow ---------- */
+#thread-glow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 24px 8px rgba(255, 107, 61, 0.55);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.9;
+  will-change: transform, opacity, box-shadow, background;
+}
