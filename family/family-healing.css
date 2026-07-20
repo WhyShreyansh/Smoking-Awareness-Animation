@@ -72,3 +72,8 @@ body {
   justify-content: center;
   padding: 8vh 6vw;
 }
+
+.scene-inner {
+  max-width: 920px;
+  text-align: center;
+}
