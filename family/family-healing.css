@@ -63,3 +63,12 @@ body {
   position: relative;
   z-index: 2;
 }
+
+.scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8vh 6vw;
+}
