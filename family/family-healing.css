@@ -30,3 +30,13 @@ body {
   overflow-x: hidden;
   transition: color 0.8s ease;
 }
+
+/* ---------- Fixed 3D canvas ---------- */
+#scene-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: block;
+}
