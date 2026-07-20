@@ -77,3 +77,14 @@ body {
   max-width: 920px;
   text-align: center;
 }
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dawn);
+  opacity: 0.65;
+  margin-bottom: 1.8rem;
+}
