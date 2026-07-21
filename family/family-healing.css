@@ -135,3 +135,9 @@ body {
   align-items: center;
   gap: 0.6em;
 }
+
+.final-line {
+  font-size: clamp(1.6rem, 4.4vw, 3rem);
+  opacity: 0;
+  transform: translateY(20px);
+}
