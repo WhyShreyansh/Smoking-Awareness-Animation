@@ -122,3 +122,9 @@ body {
   transform: translateY(18px);
   margin: 0.15em 0;
 }
+
+/* ---------- Final scene ---------- */
+.final-scene {
+  min-height: 130vh;
+  flex-direction: column;
+}
