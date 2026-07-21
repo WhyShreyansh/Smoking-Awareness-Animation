@@ -128,3 +128,10 @@ body {
   min-height: 130vh;
   flex-direction: column;
 }
+
+.final-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
