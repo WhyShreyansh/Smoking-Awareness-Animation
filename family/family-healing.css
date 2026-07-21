@@ -108,3 +108,10 @@ body {
   opacity: 0;
   transform: translateY(28px);
 }
+
+.split-line .split-a,
+.split-line .split-b {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+}
