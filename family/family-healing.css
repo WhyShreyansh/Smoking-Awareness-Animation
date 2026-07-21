@@ -102,3 +102,9 @@ body {
   font-style: italic;
   font-weight: 400;
 }
+
+/* reveal-type lines animated in by JS/GSAP (opacity+clip driven via classes) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
