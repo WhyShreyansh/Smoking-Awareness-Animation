@@ -141,3 +141,23 @@ body {
   opacity: 0;
   transform: translateY(20px);
 }
+
+.cta-button {
+  position: relative;
+  margin-top: 3.2rem;
+  padding: 1.05rem 2.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 236, 223, 0.35);
+  background: transparent;
+  color: var(--ink-light);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease;
+}
+
+
