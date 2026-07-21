@@ -214,4 +214,9 @@ body.is-light .cta-button {
   .cta-glow { animation: none; }
 }
 
+@media (max-width: 640px) {
+  .scene { padding: 6vh 7vw; }
+  #thread-glow { width: 10px; height: 10px; }
+}
+
 
