@@ -179,4 +179,9 @@ body {
   50%      { box-shadow: 0 0 22px 6px rgba(255, 107, 61, 0.45); }
 }
 
+.cta-label {
+  position: relative;
+  z-index: 1;
+}
+
 
