@@ -199,4 +199,19 @@ body.is-light .cta-button {
   color: var(--ink-dark);
 }
 
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .split-line .split-a,
+  .split-line .split-b,
+  .stagger-lines span,
+  .final-line,
+  .cta-button {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .cta-glow { animation: none; }
+}
+
 
