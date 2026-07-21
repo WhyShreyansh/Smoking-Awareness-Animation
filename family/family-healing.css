@@ -184,4 +184,10 @@ body {
   z-index: 1;
 }
 
+/* ---------- Light-theme state (applied by JS once scroll passes
+   the midpoint, so text stays legible against the brightening scene) ---------- */
+body.is-light {
+  color: var(--ink-dark);
+}
+
 
