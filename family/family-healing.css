@@ -160,4 +160,9 @@ body {
   transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease;
 }
 
+.cta-button:hover {
+  border-color: var(--ember);
+  background: rgba(255, 107, 61, 0.08);
+}
+
 
