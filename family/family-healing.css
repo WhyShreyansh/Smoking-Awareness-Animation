@@ -115,3 +115,10 @@ body {
   opacity: 0;
   transform: translateY(20px);
 }
+
+.stagger-lines span {
+  display: block;
+  opacity: 0;
+  transform: translateY(18px);
+  margin: 0.15em 0;
+}
