@@ -197,6 +197,16 @@ const particles = new THREE.Points(particleGeo, particleMat);
 scene.add(particles);
 
 
+const threadCore = glowSprite(0xff6b3d, 0.6, 1);
+threadCore.position.set(0, -0.6, 0.5);
+scene.add(threadCore);
+
+const threadHalo = glowSprite(0xff6b3d, 1.6, 0.5);
+threadHalo.position.copy(threadCore.position);
+scene.add(threadHalo);
+
+
+
 
     
 </body>
