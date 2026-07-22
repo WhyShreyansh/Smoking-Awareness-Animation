@@ -330,6 +330,16 @@ function buildButterfly(color) {
   return bfly;
 }
 
+const butterflies = [];
+const bflyColors = [0xffb37a, 0xf7ecdf, 0xe9c9a3];
+for (let i = 0; i < 4; i++) {
+  const bf = buildButterfly(bflyColors[i % bflyColors.length]);
+  bf.position.set(-2 + Math.random() * 4, -0.3 + Math.random() * 0.8, -0.8 - Math.random() * 1.5);
+  bf.userData.phase = Math.random() * Math.PI * 2;
+  parkGroup.add(bf);
+  butterflies.push(bf);
+}
+
 
 
 
