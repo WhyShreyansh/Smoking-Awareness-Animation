@@ -205,6 +205,37 @@ const threadHalo = glowSprite(0xff6b3d, 1.6, 0.5);
 threadHalo.position.copy(threadCore.position);
 scene.add(threadHalo);
 
+// Family light-forms
+
+function buildFigure(height, glowColor, glowSize) {
+  const group = new THREE.Group();
+
+  const bodyGeo = new THREE.CylinderGeometry(height * 0.09, height * 0.14, height * 0.72, 16, 1, true);
+  const bodyMat = new THREE.MeshStandardMaterial({
+    color: 0x2a241d,
+    emissive: new THREE.Color(glowColor),
+    emissiveIntensity: 0.15,
+    transparent: true,
+    opacity: 0,
+    roughness: 0.6,
+  });
+  const body = new THREE.Mesh(bodyGeo, bodyMat);
+  body.position.y = height * 0.36;
+  group.add(body);
+
+  const headGeo = new THREE.SphereGeometry(height * 0.13, 20, 20);
+  const head = new THREE.Mesh(headGeo, bodyMat.clone());
+  head.position.y = height * 0.78;
+  group.add(head);
+
+  const halo = glowSprite(glowColor, glowSize, 0);
+  halo.position.y = height * 0.45;
+  group.add(halo);
+
+  group.userData = { body, head, halo, baseHeight: height };
+  return group;
+}
+
 
 
 
