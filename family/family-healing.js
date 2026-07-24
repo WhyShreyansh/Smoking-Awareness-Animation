@@ -171,3 +171,19 @@ const trees = [
   buildTree(3.0, -5, 1.0),
   buildTree(-5.4, -5.5, 1.1),
 ];
+trees.forEach((t) => parkGroup.add(t));
+
+function buildWing(color) {
+  const shape = new THREE.Shape();
+  shape.moveTo(0, 0);
+  shape.quadraticCurveTo(0.18, 0.16, 0, 0.3);
+  shape.quadraticCurveTo(-0.18, 0.16, 0, 0);
+  const geo = new THREE.ShapeGeometry(shape);
+  const mat = new THREE.MeshBasicMaterial({
+    color,
+    transparent: true,
+    opacity: 0,
+    side: THREE.DoubleSide,
+  });
+  return new THREE.Mesh(geo, mat);
+}
