@@ -251,3 +251,13 @@ function colorAt(p) {
   }
   return new THREE.Color(bgStops[bgStops.length - 1].color);
 }
+
+const cameraKeys = [
+  { p: 0.0, pos: [0, 0.2, 6.2], look: [0, -0.3, 0] },
+  { p: 0.22, pos: [0.3, 0.4, 5.4], look: [0, 0, 0] },
+  { p: 0.4, pos: [0.2, 0.6, 5.0], look: [0, 0.2, -0.5] },
+  { p: 0.58, pos: [-0.2, 0.9, 4.6], look: [0, 0.4, -1] },
+  { p: 0.72, pos: [0.6, 1.1, 5.6], look: [0.2, 0.3, -2] },
+  { p: 0.88, pos: [0, 1.6, 7.2], look: [0, 0.2, -2] },
+  { p: 1.0, pos: [0, 1.2, 8.4], look: [0, 0.6, -1] },
+];
