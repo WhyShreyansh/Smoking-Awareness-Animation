@@ -261,3 +261,17 @@ const cameraKeys = [
   { p: 0.88, pos: [0, 1.6, 7.2], look: [0, 0.2, -2] },
   { p: 1.0, pos: [0, 1.2, 8.4], look: [0, 0.6, -1] },
 ];
+
+function cameraAt(p) {
+  for (let i = 0; i < cameraKeys.length - 1; i++) {
+    const a = cameraKeys[i], b = cameraKeys[i + 1];
+    if (p >= a.p && p <= b.p) {
+      const t = (p - a.p) / (b.p - a.p);
+      const pos = a.pos.map((v, idx) => v + (b.pos[idx] - v) * t);
+      const look = a.look.map((v, idx) => v + (b.look[idx] - v) * t);
+      return { pos, look };
+    }
+  }
+  const last = cameraKeys[cameraKeys.length - 1];
+  return { pos: last.pos, look: last.look };
+}
