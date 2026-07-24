@@ -240,3 +240,14 @@ for (let i = 0; i < 4; i++) {
   { p: 0.88, color: "#e2b37f" }, // time passes / transformation
   { p: 1.0, color: "#f7ecdf" },  // final — full daylight
 ];
+
+function colorAt(p) {
+  for (let i = 0; i < bgStops.length - 1; i++) {
+    const a = bgStops[i], b = bgStops[i + 1];
+    if (p >= a.p && p <= b.p) {
+      const t = (p - a.p) / (b.p - a.p);
+      return new THREE.Color(a.color).lerp(new THREE.Color(b.color), t);
+    }
+  }
+  return new THREE.Color(bgStops[bgStops.length - 1].color);
+}
