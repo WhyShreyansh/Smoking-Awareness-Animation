@@ -196,3 +196,13 @@ function buildBird() {
   bird.userData = { left, right, mats: [left.material, right.material] };
   return bird;
 }
+
+const birds = [];
+for (let i = 0; i < 5; i++) {
+  const b = buildBird();
+  b.position.set(-6 + Math.random() * 12, 2 + Math.random() * 1.5, -4 - Math.random() * 3);
+  b.userData.phase = Math.random() * Math.PI * 2;
+  b.userData.speed = 0.25 + Math.random() * 0.15;
+  parkGroup.add(b);
+  birds.push(b);
+}
