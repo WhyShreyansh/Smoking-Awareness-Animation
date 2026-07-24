@@ -110,3 +110,19 @@ function buildFigure(height, glowColor, glowSize) {
     opacity: 0,
     roughness: 0.6,
   });
+  const body = new THREE.Mesh(bodyGeo, bodyMat);
+  body.position.y = height * 0.36;
+  group.add(body);
+
+  const headGeo = new THREE.SphereGeometry(height * 0.13, 20, 20);
+  const head = new THREE.Mesh(headGeo, bodyMat.clone());
+  head.position.y = height * 0.78;
+  group.add(head);
+
+  const halo = glowSprite(glowColor, glowSize, 0);
+  halo.position.y = height * 0.45;
+  group.add(halo);
+
+  group.userData = { body, head, halo, baseHeight: height };
+  return group;
+}
