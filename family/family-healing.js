@@ -133,3 +133,11 @@ const family = [
   buildFigure(1.05, 0xfff0d9, 1.6), // child
   buildFigure(1.7, 0xe9c9a3, 2.0),  // elder
 ];
+
+const familyStartX = [-1.9, -0.6, 2.0, 3.1];
+const familyGatherX = [-0.75, -0.25, 0.35, 0.9];
+
+family.forEach((fig, i) => {
+  fig.position.set(familyStartX[i], -1.4, -1.5);
+  scene.add(fig);
+});
