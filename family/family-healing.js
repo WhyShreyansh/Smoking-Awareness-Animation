@@ -73,3 +73,15 @@ for (let i = 0; i < PARTICLE_COUNT; i++) {
   basePositions[i * 3 + 2] = Math.sin(angle) * radius * 0.6 - 1;
   phases[i] = Math.random() * Math.PI * 2;
 }
+particleGeo.setAttribute("position", new THREE.BufferAttribute(basePositions.slice(), 3));
+
+const particleMat = new THREE.PointsMaterial({
+  size: 0.045,
+  color: 0x8a8a8a,
+  transparent: true,
+  opacity: 0.55,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+});
+const particles = new THREE.Points(particleGeo, particleMat);
+scene.add(particles);
