@@ -141,3 +141,26 @@ family.forEach((fig, i) => {
   fig.position.set(familyStartX[i], -1.4, -1.5);
   scene.add(fig);
 });
+
+// Park elements
+
+const parkGroup = new THREE.Group();
+parkGroup.visible = true;
+scene.add(parkGroup);
+
+function buildTree(x, z, scale) {
+  const t = new THREE.Group();
+  const trunkMat = new THREE.MeshStandardMaterial({ color: 0x4a3a2a, transparent: true, opacity: 0 });
+  const foliageMat = new THREE.MeshStandardMaterial({ color: 0x4b5a3a, transparent: true, opacity: 0 });
+
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.08, 0.6, 8), trunkMat);
+  trunk.position.y = 0.3;
+  const foliage = new THREE.Mesh(new THREE.ConeGeometry(0.55, 1.3, 10), foliageMat);
+  foliage.position.y = 1.15;
+
+  t.add(trunk, foliage);
+  t.position.set(x, -1.6, z);
+  t.scale.setScalar(scale);
+  t.userData = { trunkMat, foliageMat };
+  return t;
+}
