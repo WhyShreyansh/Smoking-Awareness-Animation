@@ -228,3 +228,15 @@ for (let i = 0; i < 4; i++) {
   parkGroup.add(bf);
   butterflies.push(bf);
 }
+
+//  Color + camera keyframes
+
+ const bgStops = [
+  { p: 0.0, color: "#08080b" },  // void — the decision
+  { p: 0.22, color: "#17151a" }, // still dark — breaking free begins
+  { p: 0.4, color: "#2a2620" },  // family returns, first warmth
+  { p: 0.58, color: "#5a4732" }, // new beginning
+  { p: 0.72, color: "#a97a4d" }, // park, golden hour
+  { p: 0.88, color: "#e2b37f" }, // time passes / transformation
+  { p: 1.0, color: "#f7ecdf" },  // final — full daylight
+];
