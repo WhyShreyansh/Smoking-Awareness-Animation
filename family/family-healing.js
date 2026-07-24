@@ -164,3 +164,10 @@ function buildTree(x, z, scale) {
   t.userData = { trunkMat, foliageMat };
   return t;
 }
+const trees = [
+  buildTree(-4.2, -3, 1.3),
+  buildTree(-3.1, -4.5, 0.9),
+  buildTree(4.0, -3.4, 1.4),
+  buildTree(3.0, -5, 1.0),
+  buildTree(-5.4, -5.5, 1.1),
+];
