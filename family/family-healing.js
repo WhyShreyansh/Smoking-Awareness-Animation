@@ -206,3 +206,15 @@ for (let i = 0; i < 5; i++) {
   parkGroup.add(b);
   birds.push(b);
 }
+
+function buildButterfly(color) {
+  const bfly = new THREE.Group();
+  const left = buildWing(color);
+  const right = buildWing(color);
+  right.rotation.y = Math.PI;
+  left.scale.setScalar(0.5);
+  right.scale.setScalar(0.5);
+  bfly.add(left, right);
+  bfly.userData = { left, right, mats: [left.material, right.material] };
+  return bfly;
+}
