@@ -187,3 +187,12 @@ function buildWing(color) {
   });
   return new THREE.Mesh(geo, mat);
 }
+function buildBird() {
+  const bird = new THREE.Group();
+  const left = buildWing(0x2a2a2a);
+  const right = buildWing(0x2a2a2a);
+  right.rotation.y = Math.PI;
+  bird.add(left, right);
+  bird.userData = { left, right, mats: [left.material, right.material] };
+  return bird;
+}
