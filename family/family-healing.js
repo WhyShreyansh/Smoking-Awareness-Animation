@@ -94,3 +94,19 @@ scene.add(threadCore);
 const threadHalo = glowSprite(0xff6b3d, 1.6, 0.5);
 threadHalo.position.copy(threadCore.position);
 scene.add(threadHalo);
+
+
+// Family light-forms
+
+function buildFigure(height, glowColor, glowSize) {
+  const group = new THREE.Group();
+
+  const bodyGeo = new THREE.CylinderGeometry(height * 0.09, height * 0.14, height * 0.72, 16, 1, true);
+  const bodyMat = new THREE.MeshStandardMaterial({
+    color: 0x2a241d,
+    emissive: new THREE.Color(glowColor),
+    emissiveIntensity: 0.15,
+    transparent: true,
+    opacity: 0,
+    roughness: 0.6,
+  });
