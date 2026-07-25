@@ -329,3 +329,17 @@ function revealScene(sectionSelector) {
 }
 
 ["#scene-1", "#scene-2", "#scene-3", "#scene-4", "#scene-5", "#scene-6", "#scene-7"].forEach(revealScene);
+
+// Final scene
+
+const finalLines = gsap.utils.toArray("[data-final-line]");
+gsap.timeline({
+  scrollTrigger: {
+    trigger: "#scene-final",
+    start: "top 60%",
+    end: "top -20%",
+    scrub: 0.6,
+  },
+})
+  .to(finalLines, { opacity: 1, y: 0, duration: 1, stagger: 1 })
+  .to("#cta-button", { opacity: 1, y: 0, duration: 1 }, "-=0.4");
