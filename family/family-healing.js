@@ -352,3 +352,21 @@ ScrollTrigger.create({
   onEnter: () => document.body.classList.add("is-light"),
   onLeaveBack: () => document.body.classList.remove("is-light"),
 });
+
+// Render loop
+
+const clock = new THREE.Clock();
+
+function updateParticles(t, p) {
+  const pos = particleGeo.attributes.position.array;
+  const riseAmount = 0.4 + p * 1.6;
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const bx = basePositions[i * 3];
+    const by = basePositions[i * 3 + 1];
+    const bz = basePositions[i * 3 + 2];
+    const phase = phases[i];
+    pos[i * 3] = bx + Math.sin(t * 0.3 + phase) * (0.15 + p * 0.5);
+    pos[i * 3 + 1] = by + (t * (0.05 + p * 0.12)) % riseAmount;
+    pos[i * 3 + 2] = bz + Math.cos(t * 0.25 + phase) * (0.15 + p * 0.5);
+  }
+  particleGeo.attributes.position.needsUpdate = true;
