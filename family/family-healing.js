@@ -395,3 +395,37 @@ function updateThread(p) {
   const scale = 0.5 + p * 1.8;
   threadCore.scale.set(scale, scale, 1);
   threadHalo.scale.set(scale * 2.6, scale * 2.6, 1);
+  //  project 3D position to screen space for the DOM glow element
+  const vector = threadCore.position.clone().project(camera);
+  const sx = (vector.x * 0.5 + 0.5) * window.innerWidth;
+  const sy = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+  const domGlow = document.getElementById("thread-glow");
+  domGlow.style.left = `${sx}px`;
+  domGlow.style.top = `${sy}px`;
+  domGlow.style.background = `#${c.getHexString()}`;
+  domGlow.style.boxShadow = `0 0 ${24 + p * 40}px ${8 + p * 14}px rgba(255, ${107 + p * 120}, ${61 + p * 130}, ${0.5 + p * 0.2})`;
+  domGlow.style.width = `${14 + p * 30}px`;
+  domGlow.style.height = `${14 + p * 30}px`;
+  domGlow.style.opacity = p > 0.94 ? Math.max(0, 1 - (p - 0.94) / 0.06) : 0.9; // fold into CTA glow at the very end
+}
+
+function updateFamily(p) {
+  // Figures fade in starting at the "family returns" scene (~p 0.35),
+  // then gather closer together through "new beginning" and "transformation".
+  const appear = gsap.utils.clamp(0, 1, (p - 0.32) / 0.18);
+  const gather = gsap.utils.clamp(0, 1, (p - 0.5) / 0.4);
+
+  family.forEach((fig, i) => {
+    const targetX = familyStartX[i] + (familyGatherX[i] - familyStartX[i]) * gather;
+    fig.position.x += (targetX - fig.position.x) * 0.08;
+    fig.position.y = -1.4 + appear * 1.15;
+
+    const body = fig.userData.body;
+    const head = fig.userData.head;
+    const halo = fig.userData.halo;
+    body.material.opacity = appear * 0.9;
+    head.material.opacity = appear * 0.9;
+    body.material.emissiveIntensity = 0.15 + p * 0.5;
+    halo.material.opacity = appear * 0.55;
+  });
+}
