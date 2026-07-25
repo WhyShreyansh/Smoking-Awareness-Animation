@@ -377,3 +377,11 @@ function updateParticles(t, p) {
   particleMat.opacity = 0.35 + p * 0.35;
   particleMat.size = 0.045 + p * 0.03;
 }
+
+function updateThread(p) {
+  // trajectory: low ember (scene 1) -> drifting up (scene 2-4) -> sun position, upper right (final)
+  const x = -0.2 + p * 0.6;
+  const y = -0.6 + p * 2.6;
+  const z = 0.5 - p * 1.5;
+  threadCore.position.set(x, y, z);
+  threadHalo.position.copy(threadCore.position);
