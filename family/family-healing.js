@@ -370,3 +370,10 @@ function updateParticles(t, p) {
     pos[i * 3 + 2] = bz + Math.cos(t * 0.25 + phase) * (0.15 + p * 0.5);
   }
   particleGeo.attributes.position.needsUpdate = true;
+
+  const smokeColor = new THREE.Color(0x6d6d6d);
+  const lightColor = new THREE.Color(0xffe3bf);
+  particleMat.color.copy(smokeColor).lerp(lightColor, Math.min(p * 1.4, 1));
+  particleMat.opacity = 0.35 + p * 0.35;
+  particleMat.size = 0.045 + p * 0.03;
+}
