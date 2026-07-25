@@ -438,3 +438,13 @@ function updatePark(p) {
     const green = new THREE.Color(0x4b5a3a).lerp(new THREE.Color(0x7c9668), Math.min(p * 1.2, 1));
     tree.userData.foliageMat.color.copy(green);
   });
+
+  const t = clock.elapsedTime;
+  birds.forEach((b) => {
+    b.userData.mats.forEach((m) => (m.opacity = appear * 0.8));
+    b.position.x += Math.sin(t * b.userData.speed + b.userData.phase) * 0.002;
+    b.position.y += Math.cos(t * 1.6 + b.userData.phase) * 0.0015;
+    const flap = Math.sin(t * 6 + b.userData.phase) * 0.5 + 0.5;
+    b.userData.left.rotation.y = -flap * 0.9;
+    b.userData.right.rotation.y = Math.PI + flap * 0.9;
+  });
