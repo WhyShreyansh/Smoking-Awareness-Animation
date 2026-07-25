@@ -275,3 +275,15 @@ function cameraAt(p) {
   const last = cameraKeys[cameraKeys.length - 1];
   return { pos: last.pos, look: last.look };
 }
+
+let scrollProgress = 0; // 0 -> 1 across the whole story, driven by ScrollTrigger
+
+ScrollTrigger.create({
+  trigger: "#story",
+  start: "top top",
+  end: "bottom bottom",
+  scrub: true,
+  onUpdate: (self) => {
+    scrollProgress = self.progress;
+  },
+});
