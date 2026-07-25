@@ -448,3 +448,14 @@ function updatePark(p) {
     b.userData.left.rotation.y = -flap * 0.9;
     b.userData.right.rotation.y = Math.PI + flap * 0.9;
   });
+
+  butterflies.forEach((bf) => {
+    bf.userData.mats.forEach((m) => (m.opacity = appear * 0.9));
+    const t2 = t * 0.8 + bf.userData.phase;
+    bf.position.x += Math.sin(t2) * 0.0015;
+    bf.position.y += Math.sin(t2 * 2.2) * 0.001;
+    const flap = Math.sin(t * 10 + bf.userData.phase) * 0.6 + 0.6;
+    bf.userData.left.rotation.y = -flap * 1.1;
+    bf.userData.right.rotation.y = Math.PI + flap * 1.1;
+  });
+}
