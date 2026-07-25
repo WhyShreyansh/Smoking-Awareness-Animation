@@ -287,3 +287,18 @@ ScrollTrigger.create({
     scrollProgress = self.progress;
   },
 });
+
+// GSAP ScrollTrigger
+
+function revealScene(sectionSelector) {
+  const section = document.querySelector(sectionSelector);
+  if (!section) return;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: "top 65%",
+      end: "top 20%",
+      toggleActions: "play none none reverse",
+    },
+  });
