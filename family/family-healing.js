@@ -385,3 +385,13 @@ function updateThread(p) {
   const z = 0.5 - p * 1.5;
   threadCore.position.set(x, y, z);
   threadHalo.position.copy(threadCore.position);
+
+   const emberColor = new THREE.Color(0xff6b3d);
+  const sunColor = new THREE.Color(0xffe3a8);
+  const c = emberColor.clone().lerp(sunColor, p);
+  threadCore.material.color.copy(c);
+  threadHalo.material.color.copy(c);
+
+  const scale = 0.5 + p * 1.8;
+  threadCore.scale.set(scale, scale, 1);
+  threadHalo.scale.set(scale * 2.6, scale * 2.6, 1);
