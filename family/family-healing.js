@@ -343,3 +343,12 @@ gsap.timeline({
 })
   .to(finalLines, { opacity: 1, y: 0, duration: 1, stagger: 1 })
   .to("#cta-button", { opacity: 1, y: 0, duration: 1 }, "-=0.4");
+
+  /* Body switches to the light-text theme once the scene brightens past midpoint */
+ScrollTrigger.create({
+  trigger: "#story",
+  start: "60% top",
+  end: "80% top",
+  onEnter: () => document.body.classList.add("is-light"),
+  onLeaveBack: () => document.body.classList.remove("is-light"),
+});
