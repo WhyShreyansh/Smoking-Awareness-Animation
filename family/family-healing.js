@@ -316,3 +316,14 @@ function revealScene(sectionSelector) {
   if (staggerSpans.length) {
     tl.to(staggerSpans, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.45 }, 0);
   }
+
+  gsap.to(section.querySelector(".eyebrow"), {
+    opacity: 0.65,
+    duration: 1,
+    scrollTrigger: {
+      trigger: section,
+      start: "top 70%",
+      toggleActions: "play none none reverse",
+    },
+  });
+}
