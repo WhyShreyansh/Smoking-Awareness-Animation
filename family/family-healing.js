@@ -302,3 +302,17 @@ function revealScene(sectionSelector) {
       toggleActions: "play none none reverse",
     },
   });
+
+  const plainReveal = section.querySelectorAll(".line.reveal:not(.split-line):not(.stagger-lines)");
+  const splitParts = section.querySelectorAll(".split-line .split-a, .split-line .split-b");
+  const staggerSpans = section.querySelectorAll(".stagger-lines span");
+
+  if (plainReveal.length) {
+    tl.to(plainReveal, { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, 0);
+  }
+  if (splitParts.length) {
+    tl.to(splitParts, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", stagger: 0.5 }, 0);
+  }
+  if (staggerSpans.length) {
+    tl.to(staggerSpans, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.45 }, 0);
+  }
