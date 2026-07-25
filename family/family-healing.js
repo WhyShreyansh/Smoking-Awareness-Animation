@@ -429,3 +429,12 @@ function updateFamily(p) {
     halo.material.opacity = appear * 0.55;
   });
 }
+
+function updatePark(p) {
+  const appear = gsap.utils.clamp(0, 1, (p - 0.6) / 0.25);
+  trees.forEach((tree, i) => {
+    tree.userData.trunkMat.opacity = appear * 0.85;
+    tree.userData.foliageMat.opacity = appear * 0.85;
+    const green = new THREE.Color(0x4b5a3a).lerp(new THREE.Color(0x7c9668), Math.min(p * 1.2, 1));
+    tree.userData.foliageMat.color.copy(green);
+  });
