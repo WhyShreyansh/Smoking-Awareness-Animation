@@ -459,3 +459,27 @@ function updatePark(p) {
     bf.userData.right.rotation.y = Math.PI + flap * 1.1;
   });
 }
+
+function render() {
+  const t = clock.getElapsedTime();
+  const p = scrollProgress;
+
+  scene.background = colorAt(p);
+  renderer.setClearColor(colorAt(p));
+
+  const cam = cameraAt(p);
+  camera.position.set(cam.pos[0], cam.pos[1], cam.pos[2]);
+  camera.lookAt(cam.look[0], cam.look[1], cam.look[2]);
+
+  keyLight.color.copy(new THREE.Color(0xffb37a).lerp(new THREE.Color(0xfff0d9), p));
+  keyLight.intensity = 1.0 + p * 0.6;
+  ambient.intensity = 0.5 + p * 0.5;
+
+  updateParticles(t, p);
+  updateThread(p);
+  updateFamily(p);
+  updatePark(p);
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+}
