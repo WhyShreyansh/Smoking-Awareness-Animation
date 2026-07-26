@@ -483,3 +483,12 @@ function render() {
   renderer.render(scene, camera);
   requestAnimationFrame(render);
 }
+
+if (reduceMotion) {
+  // still render one composed frame so the canvas isn't blank,
+  // but skip the animation loop entirely.
+  scrollProgress = 0;
+  renderer.render(scene, camera);
+} else {
+  render();
+}
